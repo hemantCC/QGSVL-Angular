@@ -1,0 +1,49 @@
+<div class="container mx-0">
+  <div class="row">
+
+    <div class="accordion col-md-12 col-xl-12" id="accordionExample" style="margin-top: 6%;">
+      <div class="card">
+        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+          aria-controls="collapseOne">
+          <h2 class="mb-0">
+            <div class="row">
+              <h6 class="col-md-11"> Direct Debit</h6>
+              <div class="col-md-1"> <i class="fa fa-plus" style="font-size:20px;"></i> </div>
+            </div>
+          </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <form name="templateDrivenForm" novalidate>
+              <div class="form-group row">
+                <label for="iBan" class="col-sm-2 col-form-label">IBAN:</label>
+                <!-- <input id="iBan" name="iban" class="form-control" #iban="ngModel" type="text" ibanValidator
+                  [(ngModel)]="ibanNumber"  required autocomplete="off"> -->
+                <div *ngIf="iban.invalid && (iban.dirty || iban.touched)" class="alert alert-danger">
+
+                  <div *ngIf="iban.errors.required">
+                    IBAN is required.
+                  </div>
+                  <div *ngIf="iban.errors.iban">
+                    IBAN is invalid
+                  </div>
+
+                </div>
+                <div *ngIf="iban.valid && (iban.dirty || iban.touched)" class="alert alert-danger">
+                  IBAN is valid.
+                </div> 
+              </div>
+              <button class="btn btn-success mt-3" style="width: 100px;"> <i class="fa fa-floppy-o"></i> Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row d-flex justify-content-between px-4 mt-4 py-2">
+    <div class="btn btn-primary">Previous</div>
+    <div class="btn btn-primary">Continue</div>
+  </div>
+</div>

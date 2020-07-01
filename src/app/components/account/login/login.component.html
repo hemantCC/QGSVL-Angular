@@ -1,0 +1,51 @@
+<div class="container-fluid px-0">
+    <div class="row p-0">
+        <div class="col-md-6">
+            <img src="/assets/images/RegisterBanner.jpg" alt="Register Banner" width="100%" height="630px">
+        </div>
+
+        <div class="col-md-6 mt-4 form1 pr-5 pl-5">
+            <!-- Form Begin -->
+            <form #loginForm="ngForm" (ngSubmit)="formSubmit(loginForm)" style="margin-top: 20%;" autocomplete="off">
+                <div class="text-center display-4">Login</div>
+                <div class="row mt-2">
+
+                    <div class="form-group col-md-12">
+                        <label for="email">Email:</label>
+                        <input id="email" type="text" name="Email" #email="ngModel" [(ngModel)]="user.Email"
+                            class="form-control" required>
+                        <div class="text-danger" *ngIf="email.touched && !email.valid">Email is Required!</div>
+                    </div>
+
+                    <!-- <div class="form-group col-md-12">
+                        <label for="password">Password:</label>
+                        <input id="password" type="password" name="Password" #password="ngModel" [(ngModel)]="user.Password" class="form-control" required>
+                        <div class="text-danger" *ngIf="password.touched && !password.valid">Password is Required!</div>
+                    </div>  -->
+                    <div class="form-group col-md-12">
+                        <label for="password">Password:</label>
+                    <div class="input-group mb-3">
+                        <input id="password" type="password" name="Password" #password="ngModel" [(ngModel)]="user.Password" class="form-control" required>
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="mr-2 fa fa-eye"></i><input type="checkbox" (change)="seePassword = !seePassword" > 
+                              </div>
+                            </div>
+                      </div>
+                      <div [hidden]="!seePassword"> {{ user.Password }}</div>
+                      <div class="text-danger" *ngIf="password.touched && !password.valid">Password is Required!</div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-primary  float-center btn-block"
+                            [disabled]="loginForm.invalid">Login</button>
+                    </div>
+                    <div class="form-group col-md-12">
+                        New ? <a [routerLink]="['/register']">Register here</a>
+                    </div>
+                </div>
+            </form>
+            <!-- form End -->
+        </div>
+    </div>
+</div>
