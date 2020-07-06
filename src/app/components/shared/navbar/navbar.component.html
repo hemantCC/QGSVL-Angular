@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;font-family:sans-serif !important;">
-  <a class="navbar-brand font-bold" href="/Car/HomeCarDetails"><h2>QGS<em style="font-style:normal;color:red">VL</em></h2></a>
+  <a class="navbar-brand font-bold" href="#"><h2>QGS<em style="font-style:normal;color:red">VL</em></h2></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,10 +23,10 @@
         <a class="nav-link" href="#" [hidden]="!userExist" (click)="logoutUser()"><i class="fa fa-sign-out"></i> Logout</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink='/login' [hidden]="userExist"><i class="fa fa-sign-in"></i> Login</a>
+        <a class="nav-link" routerLink='/account/login' [hidden]="userExist"><i class="fa fa-sign-in"></i> Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink='/register' [hidden]="userExist"><i class="fa fa-user"></i> Register</a>
+        <a class="nav-link" routerLink='/account/register' [hidden]="userExist"><i class="fa fa-user"></i> Register</a>
       </li>
     </ul>
   </div>

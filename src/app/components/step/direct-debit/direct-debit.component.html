@@ -18,23 +18,23 @@
             <form name="templateDrivenForm" novalidate>
               <div class="form-group row">
                 <label for="iBan" class="col-sm-2 col-form-label">IBAN:</label>
-                <!-- <input id="iBan" name="iban" class="form-control" #iban="ngModel" type="text" ibanValidator
-                  [(ngModel)]="ibanNumber"  required autocomplete="off"> -->
-                <div *ngIf="iban.invalid && (iban.dirty || iban.touched)" class="alert alert-danger">
+                <input id="iBan" name="iban" class="form-control col-md-4" #iban="ngModel" type="text" ibanValidator
+                  [(ngModel)]="ibanNumber"  required autocomplete="off">
+                <div *ngIf="iban.invalid && (iban.dirty || iban.touched)" class="text-danger">
 
                   <div *ngIf="iban.errors.required">
                     IBAN is required.
                   </div>
                   <div *ngIf="iban.errors.iban">
-                    IBAN is invalid
+                   <i class="fa fa-times-circle-o"></i> IBAN is invalid
                   </div>
 
                 </div>
-                <div *ngIf="iban.valid && (iban.dirty || iban.touched)" class="alert alert-danger">
-                  IBAN is valid.
+                <div *ngIf="iban.valid && (iban.dirty || iban.touched)" class="text-success">
+                  <i class="fa fa-check-circle"></i> IBAN is valid.
                 </div> 
               </div>
-              <button class="btn btn-success mt-3" style="width: 100px;"> <i class="fa fa-floppy-o"></i> Save</button>
+              <button class="btn btn-success mt-3" style="width: 150px;"> <i class="fa fa-floppy-o"></i> Save</button>
             </form>
           </div>
         </div>
@@ -43,7 +43,7 @@
 
   </div>
   <div class="row d-flex justify-content-between px-4 mt-4 py-2">
-    <div class="btn btn-primary">Previous</div>
-    <div class="btn btn-primary">Continue</div>
+    <div class="btn btn-primary" style="width: 200px;">Previous</div>
+    <div class="btn btn-primary" style="width: 200px;">Continue</div>
   </div>
 </div>

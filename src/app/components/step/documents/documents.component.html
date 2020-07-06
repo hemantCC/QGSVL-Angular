@@ -1,3 +1,52 @@
-<p>
-  documents works!
-</p>
+<div class="container mx-0">
+  <div class="row">
+
+    <div class="accordion col-md-12 col-xl-12" id="accordionExample" style="margin-top: 6%;">
+      <div class="card">
+        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+          aria-controls="collapseOne">
+          <h2 class="mb-0">
+            <div class="row">
+              <h6 class="col-md-11"> Direct Debit</h6>
+              <div class="col-md-1"> <i class="fa fa-plus" style="font-size:20px;"></i> </div>
+            </div>
+          </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <form #documentsForm>
+              <div class="form-group">
+                <div class="mt-5 mb-3"><b>Driving License</b></div>
+                <input name="DL" type="file" [(ngModel)]="documents.drivingLicense" />
+                <span style="color:red;">Max file size : 3MB</span>
+              </div>
+              <hr />
+              <div class="form-group">
+                <div class="mt-5 mb-3"><b>Certificate Of Residence</b></div>
+                <input name="COR" type="file" [(ngModel)]="documents.CertificateOfResidence" />
+                <span style="color:red;">Max file size : 3MB</span>
+              </div>
+              <hr />
+              <div class="form-group">
+                <div class="mt-5 mb-3"><b>Identification Proof</b></div>
+                <input name="IDProof" type="file" [(ngModel)]="documents.IdentityProof" />
+                <span style="color:red;">Max file size : 3MB</span>
+              </div>
+              <hr />
+              <button class="btn btn-success mt-3" style="width: 150px;" (click)="onSave($event)">
+                 <i class="fa fa-floppy-o"></i> Save</button>
+            
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row d-flex justify-content-between px-4 mt-4 py-2">
+    <div class="btn btn-primary" style="width: 200px;">Previous</div>
+    <div class="btn btn-primary" style="width: 200px;">Continue</div>
+  </div>
+</div>
+
