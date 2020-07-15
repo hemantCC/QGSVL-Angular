@@ -8,32 +8,33 @@ import { ForbiddenComponent } from './components/shared/forbidden/forbidden.comp
 
 const routes: Routes = [
   {
-    path:'',
-    redirectTo:'/account/login',pathMatch:'full'
+    path: '',
+    redirectTo: '/account/login', pathMatch: 'full'
   },
   {
-    path : 'Home',canActivate:[AuthGuard],
+    path: 'Home', canActivate: [AuthGuard],
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
   },
   {
-    path : 'admin-dashboard', canActivate:[AuthGuard], data:{permittedRoles: ['Admin'] },
+    path: 'admin-dashboard', canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] },
     component: AdminDashboardComponent
   },
   {
-    path:'account',
+    path: 'account',
     loadChildren: () => import('./components/account/account.module').then(m => m.AccountModule)
   },
   {
-    path:'step',
+    // canActivate: [AuthGuard], data: { permittedRoles: ['User'] },
+    path: 'step', 
     loadChildren: () => import('./components/step/step.module').then(m => m.StepModule)
   },
   {
-    path : 'forbidden', 
+    path: 'forbidden',
     component: ForbiddenComponent
   },
   {
-    path:'**',
-    component:PageNotFoundComponent
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 

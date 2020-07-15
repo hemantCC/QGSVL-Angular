@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user';
 import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
+import { dropDownValues } from 'src/app/models/creditCheck';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
-  user: User = new User('');
+  user: User = new User('','','','', null,'','');
+  // user: User = new User('');
 
-  data: Array<Object> = [
+  data: dropDownValues[] = [
     { id: 0, name: 'Mr.' },
     { id: 1, name: 'Mrs.' },
     { id: 2, name: 'Ms.' },
@@ -33,13 +35,12 @@ export class RegisterComponent implements OnInit {
         this.toastr.success('You have successfully Registered!', 'Registration Sucessfull');
       },
       error => {
+        console.log(form);
+        
         this.toastr.error('Something went wrong', 'Registration Failed');
         console.log(error);
       }
     );
-  }
-
-  selected() {
   }
 
 }

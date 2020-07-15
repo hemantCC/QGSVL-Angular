@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   logoutUser(){
     localStorage.removeItem('token');
     this.toastr.success('You have successfully logged out!','Logout Sucessfull');
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/account/login');
   }
 
 }

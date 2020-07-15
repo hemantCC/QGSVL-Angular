@@ -7,15 +7,16 @@ import { Documents } from 'src/app/models/documents';
   styleUrls: ['./documents.component.css']
 })
 export class DocumentsComponent implements OnInit {
-  documents : Documents = new Documents('','','');
+  documents : Documents = new Documents( null,null,null);
  
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSave(event){
-    console.log(document);
+  onSave(files: any){
+    console.log(files);
   }
+  
 
 }

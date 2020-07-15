@@ -1,4 +1,4 @@
-<div class="container mx-0">
+<div class="container">
   <div class="row">
 
     <div class="accordion col-md-12 col-xl-12" id="accordionExample" style="margin-top: 6%;">
@@ -6,9 +6,9 @@
         <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
           aria-controls="collapseOne">
           <h2 class="mb-0">
-            <div class="row">
+            <div class="row d-flex align-items-center">
               <h6 class="col-md-11"> Direct Debit</h6>
-              <div class="col-md-1"> <i class="fa fa-plus" style="font-size:20px;"></i> </div>
+              <i class="fa fa-angle-down col-md-1 col-1" style="font-size:30px;"></i>
             </div>
           </h2>
         </div>
@@ -19,7 +19,7 @@
               <div class="form-group row">
                 <label for="iBan" class="col-sm-2 col-form-label">IBAN:</label>
                 <input id="iBan" name="iban" class="form-control col-md-4" #iban="ngModel" type="text" ibanValidator
-                  [(ngModel)]="ibanNumber"  required autocomplete="off">
+                  [(ngModel)]="debit.ibanNumber"  required autocomplete="off">
                 <div *ngIf="iban.invalid && (iban.dirty || iban.touched)" class="text-danger">
 
                   <div *ngIf="iban.errors.required">
@@ -34,7 +34,7 @@
                   <i class="fa fa-check-circle"></i> IBAN is valid.
                 </div> 
               </div>
-              <button class="btn btn-success mt-3" style="width: 150px;"> <i class="fa fa-floppy-o"></i> Save</button>
+              <button class="btn btn-success mt-3" style="width: 150px;" (click)="onSave()"> <i class="fa fa-floppy-o"></i> Save</button>
             </form>
           </div>
         </div>
@@ -43,7 +43,7 @@
 
   </div>
   <div class="row d-flex justify-content-between px-4 mt-4 py-2">
-    <div class="btn btn-primary" style="width: 200px;">Previous</div>
-    <div class="btn btn-primary" style="width: 200px;">Continue</div>
+    <div class="btn btn-primary" routerLink='/step/EndOfCreditCheck' style="width: 200px;">Previous</div>
+    <div class="btn btn-primary" routerLink='/step/documents' style="width: 200px;">Continue</div>
   </div>
 </div>

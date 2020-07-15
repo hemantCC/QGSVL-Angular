@@ -4,6 +4,8 @@ import { DirectDebitComponent } from './direct-debit/direct-debit.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { StepComponent } from './step.component';
 import { ESignComponent } from './e-sign/e-sign.component';
+import { CreditCheckComponent } from './credit-check/credit-check.component';
+import { EndOfCreditCheckComponent } from './end-of-credit-check/end-of-credit-check.component';
 
 
 const routes: Routes = [
@@ -11,6 +13,14 @@ const routes: Routes = [
     path: '',
     component: StepComponent,
     children: [
+      { 
+        path: 'credit-check',
+        component: CreditCheckComponent 
+      },
+      { 
+        path: 'EndOfCreditCheck',
+        component: EndOfCreditCheckComponent 
+      },
       { 
         path: 'direct-debit',
         component: DirectDebitComponent 

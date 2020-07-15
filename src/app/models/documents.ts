@@ -2,9 +2,9 @@ export class Documents {
     /**
      *
      */
-    constructor(public drivingLicense: string, 
-        public CertificateOfResidence: string, 
-        public IdentityProof: string) {
+    constructor(public drivingLicense: File, 
+        public CertificateOfResidence: File, 
+        public IdentityProof: File) {
         
     }
 }

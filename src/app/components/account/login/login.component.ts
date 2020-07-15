@@ -29,17 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   formSubmit(form: NgForm) {
-    console.log(form.value);
     this.accountService.loginUser(form.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-        // var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
-        // var userRole = payLoad.role;
-        // console.log(userRole);
-        // if (userRole == 'Admin') {
-        //   this.router.navigateByUrl('/admin-dashboard');
-        // }
-        // else
         this.toastr.success('You have successfully logged in !','Login Sucessfull');
         this.router.navigateByUrl('/Home');
       },

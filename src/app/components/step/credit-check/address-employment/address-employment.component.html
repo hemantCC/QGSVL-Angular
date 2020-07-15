@@ -1,0 +1,105 @@
+ <!-- Accordian - Address and Employment -->
+ <div class="card">
+  <div class="card-header" id="headingTwo" type="button" data-toggle="collapse" data-target="#collapseTwo"
+    aria-expanded="true" aria-controls="collapseOne">
+    <h2 class="mb-0">
+      <div class="row d-flex align-items-center">
+        <h6 class="col-md-11 col-11">Address and Employment</h6>
+        <i class="fa fa-angle-down col-md-1 col-1 p-0" style="font-size:30px;"></i>
+      </div>
+    </h2>
+  </div>
+  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <form class="card-body" [formGroup]="addressEmploymentForm" (ngSubmit)="onSubmit()">
+      <h5>Address and Employment</h5>
+      <hr>
+      <div class="row" >
+        <div class="form-group col-md-6">
+          <label for="empstatus">Employment Status</label>
+          <select id="empstatus" name="empstatus" class="form-control" formControlName="employmentStatus">
+            <option *ngFor="let item of allValues?.employmentStatuses" [ngValue]="item.name">{{item.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="emprname">Employer Name</label>
+          <input type="text" id="emprname" class="form-control" formControlName="employerName">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ctype">Contract Type</label>
+          <select id="ctype" name="ctype" class="form-control" formControlName="contractType">
+            <option *ngFor="let item of allValues?.contractTypes" [ngValue]="item.name">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sd">Start Date</label>
+          <input id="sd" type="text" bsDatepicker name="sd" class="form-control" formControlName="startDate"
+          [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ad1">Address Line 1</label>
+          <textarea id="ad1" class="form-control" formControlName="addressLine1"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ad2">Address Line 2</label>
+          <textarea id="ad2" class="form-control" formControlName="addressLine2"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="pcode">Postal Code</label>
+          <input type="text" id="pcode" class="form-control" formControlName="postCode">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ct">City</label>
+          <input type="text" id="ct" class="form-control" formControlName="city">
+        </div>
+      </div>
+
+      <h5>Revenues and Charges</h5>
+      <hr>
+      <div class="row">
+        <div class="container">
+          <div class="row d-flex align-items-end">
+            <div class="form-group col-md-6">
+              <label for="net">Net monthly income (last month's net salary, without holiday pay, year-end bonus
+                and/or other extras) or retirement pension</label>
+              <input type="text" id="net" class="form-control" formControlName="netIncome">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="rIncome">Rental Income</label>
+              <input type="text" id="rIncome" class="form-control" formControlName="rentalIncome">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="ss">Last Salary Slip</label>
+              <input type="file" id="ss" class="form-control-file" (change)="onFileSelected($event)">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ps">Property Status</label>
+              <select id="ps" name="ps" class="form-control" formControlName="propertyStatus">
+                <option *ngFor="let item of allValues?.propertyStatuses" [ngValue]="item.name">{{item.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row d-flex align-items-end">
+            <div class="form-group col-md-6">
+              <label for="cc">Credit cost (amount of the contract subscriber's share of all outstanding
+                loans)</label>
+              <input type="text" id="cc" class="form-control" formControlName="creditCost">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="mr">Monthly rent (if you are tenant or co-tenant)</label>
+              <input type="text" id="mr" class="form-control" formControlName="monthlyRent">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-success mt-3" style="width: 150px;"> <i class="fa fa-floppy-o"></i>
+          Save</button>
+      </div>
+    </form>
+  </div>
+</div>

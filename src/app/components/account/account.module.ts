@@ -5,7 +5,7 @@ import { AccountRoutingModule } from './account-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,
     AccountRoutingModule,
     FormsModule,
-    
+    BsDatepickerModule.forRoot(),
+
   ]
 })
 export class AccountModule { }

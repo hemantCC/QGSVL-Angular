@@ -1,0 +1,115 @@
+<!-- Accordian - Personal Details -->
+<div class="card">
+  <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne"
+    aria-expanded="true" aria-controls="collapseOne">
+    <h2 class="mb-0">
+      <div class="row d-flex align-items-center">
+        <h6 class="col-md-11 col-11">Personal and Contact</h6>
+        <i class="fa fa-angle-down col-md-1 col-1 p-0" style="font-size:30px;"></i>
+      </div>
+    </h2>
+  </div>
+
+  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div class="card-body">
+
+      <!-- Personal Details section -->
+      <div>
+        <h5>Personal Details</h5>
+        <hr>
+      </div>
+      <form [formGroup]="personalDetailForm" (ngSubmit)="onSubmit()">
+        <div class="row mt-4">
+          <div class="form-group col-md-2">
+            <label for="civility">Civility</label>
+            <input type="text" id="civility" name="civility" class="form-control" [ngModel]="allValues?.user.prefix"
+              [ngModelOptions]="{standalone: true}" disabled>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" class="form-control" [ngModel]="allValues?.user.firstName"
+              [ngModelOptions]="{standalone: true}" disabled>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" class="form-control" [ngModel]="allValues?.user.lastName"
+              [ngModelOptions]="{standalone: true}" disabled>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" name="dob" class="form-control" [ngModel]="allValues?.user.dateOfBirth"
+              [ngModelOptions]="{standalone: true}" disabled>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="maritalstatus">Marital Status</label>
+            <select id="maritalstatus" name="maritalstatus" formControlName="maritalStatus" class="form-control">
+              <option *ngFor="let item of allValues?.maritalStatuses" [ngValue]="item.name">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nationality">Nationality</label>
+            <select id="nationality" name="nationality" formControlName="nationality" class="form-control">
+              <option *ngFor="let item of allValues?.nationalities" [ngValue]="item.name">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cns">Registration Number(CNS)</label>
+            <input type="text" id="cns" class="form-control" name="registrationNumber"
+              formControlName="registrationNumber">
+          </div>
+        </div>
+
+
+        <!-- Contact Details section -->
+
+        <h5>Contact Details</h5>
+        <hr>
+        <p>Your contact information will be used to discuss your application and delivery
+          arrangements. Your information may be passed to a third party purely for the purposes
+          of arranging delivery of your car.</p>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="form-control" [ngModel]="allValues?.user.email"
+              [ngModelOptions]="{standalone: true}" disabled>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="contact">Contact Number</label>
+            <input type="text" name="contact" id="contact" class="form-control" [ngModel]="allValues?.user.contact"
+              [ngModelOptions]="{standalone: true}" disabled>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="add1">Address Line 1</label>
+            <textarea id="add1" class="form-control" name="addressLine1" formControlName="addressLine1"></textarea>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="add2">Address Line 2</label>
+            <textarea id="add2" class="form-control" name="addressLine2" formControlName="addressLine2"></textarea>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="add3">Address Line 3</label>
+            <textarea id="add3" class="form-control" name="addressLine3" formControlName="addressLine3"></textarea>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="city">City</label>
+            <input type="text" id="city" class="form-control" name="city" formControlName="city">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="code">Postal Code</label>
+            <input type="text" id="code" class="form-control" name="postCode" formControlName="postCode">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="lhs">You lived here since</label>
+            <input id="lhs" type="text" bsDatepicker name="livedSince" class="form-control" formControlName="livedSince"
+              [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }">
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-success mt-3" type="submit" style="width: 150px;"> <i class="fa fa-floppy-o"></i>
+            Save</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
