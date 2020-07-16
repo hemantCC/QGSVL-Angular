@@ -42,6 +42,7 @@ export class CreditCheckComponent implements OnInit {
           this.toastr.success('','Step-1 Completed!');
         },
         (err) => {
+          console.log(err);
           this.toastr.error('Please Try again.','Step-1 Failed!');
         }
     );

@@ -41,10 +41,14 @@ export class AddressEmploymentComponent implements OnInit {
 
   onFileSelected(event) {
     this.file = event.target.files[0];
-    console.log(event.target.value);
+    console.log(this.file);
+    
+    // console.log(event.target.value);
     
     var reader = new FileReader();
-    reader.onloadend = () => {
+    debugger
+    reader.onload = () => {
+      debugger
       // this.stringFile = reader.result.toString()
       // console.log(localStorage.getItem('file'));
       // localStorage.setItem('file',this.stringFile)
@@ -53,7 +57,6 @@ export class AddressEmploymentComponent implements OnInit {
       reader.readAsDataURL(blob);
       console.log(reader.result);
     }
-
   }
 
   onSubmit() {

@@ -40,7 +40,8 @@
             <input type="text" id="dob" name="dob" class="form-control" [ngModel]="allValues?.user.dateOfBirth"
               [ngModelOptions]="{standalone: true}" disabled>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6" [ngClass]="{'has-error': personalDetailForm.get('maritalStatus').errors && 
+          (personalDetailForm.get('maritalStatus').touched || personalDetailForm.get('maritalStatus').dirty)}">
             <label for="maritalstatus">Marital Status</label>
             <select id="maritalstatus" name="maritalstatus" formControlName="maritalStatus" class="form-control">
               <option *ngFor="let item of allValues?.maritalStatuses" [ngValue]="item.name">{{item.name}}</option>
@@ -52,10 +53,17 @@
               <option *ngFor="let item of allValues?.nationalities" [ngValue]="item.name">{{item.name}}</option>
             </select>
           </div>
-          <div class="form-group col-md-6">
-            <label for="cns">Registration Number(CNS)</label>
+          <div class="form-group col-md-6" >
+            <label for="cns" class=" control-label">Registration Number(CNS)</label>
             <input type="text" id="cns" class="form-control" name="registrationNumber"
-              formControlName="registrationNumber">
+              formControlName="registrationNumber"  [ngClass]="{'is-invalid': personalDetailForm.get('registrationNumber').errors && 
+              (personalDetailForm.get('registrationNumber').touched || personalDetailForm.get('registrationNumber').dirty)}">
+              <span class="invalid-feedback" *ngIf=" personalDetailForm.get('registrationNumber').errors && 
+              (personalDetailForm.get('registrationNumber').touched || personalDetailForm.get('registrationNumber').dirty)">
+              <span *ngIf="personalDetailForm.get('registrationNumber').errors.required">
+                Registration Number Required!
+              </span>
+            </span>
           </div>
         </div>
 
@@ -106,7 +114,7 @@
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-success mt-3" type="submit" style="width: 150px;"> <i class="fa fa-floppy-o"></i>
+          <button class="btn btn-success mt-3" type="submit" style="width: 150px;" [disabled]="personalDetailForm.invalid"> <i class="fa fa-floppy-o"></i>
             Save</button>
         </div>
 

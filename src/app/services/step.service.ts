@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { directDebitUrl, creditCheckValuesUrl } from '../config/apiUrl';
+import { directDebitUrl, creditCheckValuesUrl, creditCheckUrl } from '../config/apiUrl';
 import { DirectDebit } from '../models/directDebit';
 import { Observable } from 'rxjs';
 import { CreditCheckValues, creditCheck, personalDetails, employmentDetails } from '../models/creditCheck';
@@ -36,7 +36,7 @@ export class StepService {
       EmploymentDetails: this.employmentDetails
     }
     console.log(this.data);
-    return this.http.post('',this.data,{ headers: this.getTokenHeader() });
+    return this.http.post(creditCheckUrl,this.data,{ headers: this.getTokenHeader() });
   }
 
 }

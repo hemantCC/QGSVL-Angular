@@ -6,3 +6,4 @@ export const registerUrl = baseUrl + 'api/Account/register';
 export const directDebitUrl = baseUrl + 'api/Step/DirectDebit';
 export const documentsUrl = baseUrl + 'api/Step/Documents';
 export const creditCheckValuesUrl = baseUrl + 'api/Step/CreditCheckValues';
+export const creditCheckUrl = baseUrl + 'api/Step/CreditCheck';
