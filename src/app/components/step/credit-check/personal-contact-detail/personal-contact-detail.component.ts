@@ -3,6 +3,7 @@ import { StepService } from 'src/app/services/step.service';
 import { CreditCheckValues } from 'src/app/models/creditCheck';
 import { PersonalDetail } from 'src/app/models/personalDetail';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-personal-contact-detail',
@@ -14,30 +15,34 @@ export class PersonalContactDetailComponent implements OnInit {
   @Input() allValues: CreditCheckValues
   personalDetail: PersonalDetail
   personalDetailForm: FormGroup;
+  formSaved: boolean = false;
 
   constructor(private stepService: StepService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService) {
 
     this.personalDetailForm = formBuilder.group({
       maritalStatus: ['',Validators.required],
-      nationality: new FormControl(''),
-      registrationNumber: ['',Validators.required],
-      addressLine1: new FormControl(''),
+      nationality: ['',Validators.required],
+      registrationNumber: ['',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.maxLength(13)]],
+      addressLine1: ['',Validators.required],
       addressLine2: new FormControl(''),
       addressLine3: new FormControl(''),
-      city: new FormControl(''),
-      postCode: new FormControl(''),
-      livedSince: new FormControl(''),
+      city: ['',Validators.required],
+      postCode: ['',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(5),Validators.maxLength(7)]],
+      livedSince: ['',Validators.required],
     });
   }
 
   ngOnInit() {
-    // this.onReload();
+    this.onReload();
   }
 
 
-  onSubmit() {
+  onSave() {
     localStorage.setItem('personalDetails', JSON.stringify(this.personalDetailForm.value));
+    this.formSaved = true;
+    this.toastr.success('','Saved Successfully');
     console.log(JSON.parse(localStorage.getItem('personalDetails')));
   }
 
@@ -55,7 +60,7 @@ export class PersonalContactDetailComponent implements OnInit {
         postCode: populate.postCode,
         livedSince: populate.livedSince,
       });
-
+      this.formSaved = true;
     }
   }
 }

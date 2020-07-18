@@ -9,14 +9,15 @@
 
           <app-address-employment [allValues]="allValues"></app-address-employment>
 
-          <app-aggrement></app-aggrement>
+          <app-aggrement (childValue)="fetchValueFromChild($event)"></app-aggrement>
         </div>
       </div>
 
       <!-- bottom Section -->
       <div class="row d-flex justify-content-between px-3 mt-4 ">
         <div class="btn btn-primary" routerLink='TBD' style="width: 200px;">Previous</div>
-        <div class="btn btn-primary" (click)="onContinue()" style="width: 200px;">Continue</div>
+        <button class="btn btn-primary" (click)="onContinue()" [disabled]="!(aggreed && ok)"
+         style="width: 200px;">Continue</button>
       </div>
     </div>
   </div>

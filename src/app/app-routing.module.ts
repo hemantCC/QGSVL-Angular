@@ -24,8 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/account/account.module').then(m => m.AccountModule)
   },
   {
-    // canActivate: [AuthGuard], data: { permittedRoles: ['User'] },
-    path: 'step', 
+    path: 'step', canActivate: [AuthGuard], data: { permittedRoles: ['User'] },
     loadChildren: () => import('./components/step/step.module').then(m => m.StepModule)
   },
   {

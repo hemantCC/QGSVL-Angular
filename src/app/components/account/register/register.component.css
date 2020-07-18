@@ -1,8 +1,14 @@
-/* .form1{
-    -webkit-box-shadow:-1px 9px 40px -12px rgba(0,0,0,0.75);
-    -moz-box-shadow:-1px 9px 40px -12px rgba(0,0,0,0.75);
-    box-shadow:-1px 9px 40px -12px rgba(0,0,0,0.75);
-} */
 .container-fluid{
+    min-height: 100vh;
+}
+.r1{
+    height: 100vh;
+    margin-right: 0;
+}
+.f1{
     background-color: darkgray;
 }
+.image-banner{
+height: 100%;
+}
+

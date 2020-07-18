@@ -3,14 +3,18 @@
   <div class="card-header" id="headingThree" type="button" data-toggle="collapse" data-target="#collapseThree"
     aria-expanded="true" aria-controls="collapseOne">
     <h2 class="mb-0">
-      <div class="row d-flex align-items-center">
-        <h6 class="col-md-11 col-11">Private Lease</h6>
-        <i class="fa fa-angle-down col-md-1 col-1 p-0" style="font-size:30px;"></i>
+      <div class="row d-flex align-items-center justify-content-between px-3">
+        <h6 class="">Aggrement</h6>
+        <div class="d-flex justify-content-right align-items-center">
+          <i *ngIf="agreed" class="fa fa-check-circle text-success mr-2" style="font-size: 23px;"></i>
+          <i *ngIf="!agreed" class="fa fa-times-circle-o text-danger mr-2" style="font-size: 23px;"></i>
+          <i class="fa fa-angle-down " style="font-size:30px;"></i>
+        </div>
       </div>
     </h2>
   </div>
   <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-    <div class="card-body">
+    <div class="card-body text-justify">
       <h4>Some explanations about your Private Lease contract</h4>
       <h6 class="mt-5">Private Lease</h6>
       <p>Private Lease is a long-term rental option that allows individuals to rent a new car for a specified
@@ -25,10 +29,10 @@
       <p>Please read this information carefully so that you understand how your agreement will work. If you
         have any questions please call 1122334455 or send an email to privatelease@gmail.com.</p>
       <a href="#">Download Pre-Contact Information(.pdf)</a>
-      <p class="mt-5">
-        <input type="checkbox" id="agree">
-        <label class="ml-2" for="agree"> I have reviewed and accept the information in these documents</label>
-      </p>
+      <div class="row mt-5 align-items-center justify-content-left">
+        <input  class="col-1 col-md-1 mr-0" type="checkbox" id="agree" [(ngModel)]="agreed" (change)="onChange()">
+        <label class="col-11 col-md-11 mb-0" for="agree"> I have reviewed and accept the information in these documents</label>
+      </div>
     </div>
   </div>
 </div>

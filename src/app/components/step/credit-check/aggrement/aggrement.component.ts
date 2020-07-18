@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-aggrement',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AggrementComponent implements OnInit {
 
+  @Output() childValue = new EventEmitter<boolean>();
+  agreed: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+    this.agreed = this.checkFormSubmittion();
   }
 
+  onChange(){
+    this.childValue.emit(this.agreed);
+  }
+
+  checkFormSubmittion(){
+    if(localStorage.getItem('formSubmitted') == '1'){
+      return true;
+    }
+    else return false;
+  }
 }

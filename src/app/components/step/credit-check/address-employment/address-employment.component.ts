@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CreditCheckValues, employmentDetails } from 'src/app/models/creditCheck';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-address-employment',
@@ -14,24 +15,26 @@ export class AddressEmploymentComponent implements OnInit {
   addressEmploymentForm: FormGroup;
   file: File = null;
   stringFile: string = null;
+  formSaved: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+    private toastr: ToastrService) {
 
     this.addressEmploymentForm = formBuilder.group({
-      employmentStatus: new FormControl(''),
-      employerName: new FormControl(''),
-      contractType: new FormControl(''),
-      startDate: new FormControl(''),
-      addressLine1: new FormControl(''),
+      employmentStatus: ['',Validators.required],
+      employerName: ['',[Validators.required,Validators.pattern('^[a-zA-Z ]*$'),Validators.maxLength(40)]],
+      contractType: ['',Validators.required],
+      startDate: ['',Validators.required],
+      addressLine1: ['',Validators.required],
       addressLine2: new FormControl(''),
-      postCode: new FormControl(''),
-      city: new FormControl(''),
-      netIncome: new FormControl(''),
-      rentalIncome: new FormControl(''),
+      postCode: ['',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(5),Validators.maxLength(7)]],
+      city: ['',Validators.required],
+      netIncome: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
+      rentalIncome: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
       salarySlip: new FormControl(''),
-      propertyStatus: new FormControl(''),
-      creditCost: new FormControl(''),
-      monthlyRent: new FormControl(''),
+      propertyStatus: ['',Validators.required],
+      creditCost: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
+      monthlyRent: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
     });
   }
 
@@ -42,9 +45,9 @@ export class AddressEmploymentComponent implements OnInit {
   onFileSelected(event) {
     this.file = event.target.files[0];
     console.log(this.file);
-    
+
     // console.log(event.target.value);
-    
+
     var reader = new FileReader();
     debugger
     reader.onload = () => {
@@ -59,36 +62,35 @@ export class AddressEmploymentComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    // this.addressEmploymentForm.patchValue({
-    //   salarySlip: this.file
-    // });
-
-    localStorage.setItem('address-Employment', JSON.stringify(this.addressEmploymentForm.value))
+  onSave() {
+    localStorage.setItem('address-Employment', JSON.stringify(this.addressEmploymentForm.value));
+    this.formSaved = true;
+    this.toastr.success('','Saved Successfully');
     console.log(JSON.parse(localStorage.getItem('address-Employment')));
   }
 
 
   onReload() {
-    if (localStorage.getItem('personalDetails') != null) {
+    if (localStorage.getItem('address-Employment') != null) {
       let populate: employmentDetails = JSON.parse(localStorage.getItem('address-Employment'));
       this.addressEmploymentForm.patchValue({
-        addressLine1: populate.addressLine1,
-        addressLine2: populate.addressLine2,
-        city: populate.city,
-        postCode: populate.postCode,
-        contractType: populate.contractType,
-        employerName: populate.employerName,
-        employmentStatus: populate.employmentStatus,
-        monthlyRent: populate.monthlyRent,
-        netIncome: populate.netIncome,
-        propertyStatus: populate.propertyStatus,
-        rentalIncome: populate.rentalIncome,
-        startDate: populate.startDate,
-        creditCost: populate.creditCost,
+        addressLine1: populate?.addressLine1,
+        addressLine2: populate?.addressLine2,
+        city: populate?.city,
+        postCode: populate?.postCode,
+        contractType: populate?.contractType,
+        employerName: populate?.employerName,
+        employmentStatus: populate?.employmentStatus,
+        monthlyRent: populate?.monthlyRent,
+        netIncome: populate?.netIncome,
+        propertyStatus: populate?.propertyStatus,
+        rentalIncome: populate?.rentalIncome,
+        startDate: populate?.startDate,
+        creditCost: populate?.creditCost,
       });
-
+      this.formSaved = true;
     }
+    
   }
 
 }

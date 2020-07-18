@@ -1,56 +1,123 @@
- <!-- Accordian - Address and Employment -->
- <div class="card">
+<!-- Accordian - Address and Employment -->
+<div class="card">
   <div class="card-header" id="headingTwo" type="button" data-toggle="collapse" data-target="#collapseTwo"
     aria-expanded="true" aria-controls="collapseOne">
     <h2 class="mb-0">
-      <div class="row d-flex align-items-center">
-        <h6 class="col-md-11 col-11">Address and Employment</h6>
-        <i class="fa fa-angle-down col-md-1 col-1 p-0" style="font-size:30px;"></i>
+      <div class="row d-flex align-items-center justify-content-between px-3">
+        <h6 class="">Address and Employment</h6>
+        <div class="d-flex justify-content-right align-items-center">
+          <i *ngIf="formSaved" class="fa fa-check-circle text-success mr-2" style="font-size: 23px;"></i>
+          <i *ngIf="!formSaved" class="fa fa-times-circle-o text-danger mr-2" style="font-size: 23px;"></i>
+          <i class="fa fa-angle-down " style="font-size:30px;"></i>
+        </div>
       </div>
     </h2>
   </div>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-    <form class="card-body" [formGroup]="addressEmploymentForm" (ngSubmit)="onSubmit()">
+    <form class="card-body" [formGroup]="addressEmploymentForm" (ngSubmit)="onSave()">
       <h5>Address and Employment</h5>
       <hr>
-      <div class="row" >
+      <div class="row">
         <div class="form-group col-md-6">
-          <label for="empstatus">Employment Status</label>
-          <select id="empstatus" name="empstatus" class="form-control" formControlName="employmentStatus">
+          <label for="empstatus">Employment Status <span class="asterisk">*</span></label>
+          <select id="empstatus" name="empstatus" class="form-control" formControlName="employmentStatus"
+            [ngClass]="{'is-invalid': addressEmploymentForm.get('employmentStatus').errors && 
+            (addressEmploymentForm.get('employmentStatus').touched || addressEmploymentForm.get('employmentStatus').dirty)}">
+            <option value="" disabled="true">Select Your Employment Status</option>
             <option *ngFor="let item of allValues?.employmentStatuses" [ngValue]="item.name">{{item.name}}
             </option>
           </select>
+          <span class="invalid-feedback">
+            <span *ngIf="addressEmploymentForm.get('employmentStatus').errors?.required">
+              City Name Required!
+            </span>
+          </span>
         </div>
         <div class="form-group col-md-6">
-          <label for="emprname">Employer Name</label>
-          <input type="text" id="emprname" class="form-control" formControlName="employerName">
+          <label for="emprname">Employer Name <span class="asterisk">*</span></label>
+          <input type="text" id="emprname" class="form-control" formControlName="employerName"
+            placeholder="Emter your employer name" [ngClass]="{'is-invalid': addressEmploymentForm.get('employerName').errors && 
+            (addressEmploymentForm.get('employerName').touched || addressEmploymentForm.get('employerName').dirty)}">
+          <span class="invalid-feedback">
+            <span *ngIf="addressEmploymentForm.get('employerName').errors?.required">
+              City Name Required!
+            </span>
+            <span *ngIf="addressEmploymentForm.get('employerName').errors?.pattern">
+              Only alphabets are allowed!
+            </span>
+            <span *ngIf="addressEmploymentForm.get('employerName').errors?.maxlength">
+              Maximum 40 characters are allowed!
+            </span>
+          </span>
         </div>
         <div class="form-group col-md-6">
-          <label for="ctype">Contract Type</label>
-          <select id="ctype" name="ctype" class="form-control" formControlName="contractType">
+          <label for="ctype">Contract Type <span class="asterisk">*</span></label>
+          <select id="ctype" name="ctype" class="form-control" formControlName="contractType" [ngClass]="{'is-invalid': addressEmploymentForm.get('contractType').errors && 
+            (addressEmploymentForm.get('contractType').touched || addressEmploymentForm.get('contractType').dirty)}">
+            <option value="" disabled="true">Select Contract Type</option>
             <option *ngFor="let item of allValues?.contractTypes" [ngValue]="item.name">{{item.name}}</option>
           </select>
+          <span class="invalid-feedback">
+            <span *ngIf="addressEmploymentForm.get('contractType').errors?.required">
+              City Name Required!
+            </span>
+          </span>
         </div>
         <div class="form-group col-md-6">
-          <label for="sd">Start Date</label>
+          <label for="sd">Start Date <span class="asterisk">*</span></label>
           <input id="sd" type="text" bsDatepicker name="sd" class="form-control" formControlName="startDate"
-          [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }">
+            [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }"
+            placeholder="DD-MM-YYYY"
+            [ngClass]="{'is-invalid': addressEmploymentForm.get('startDate').errors && 
+            (addressEmploymentForm.get('startDate').touched || addressEmploymentForm.get('startDate').dirty)}">
+            <span class="invalid-feedback">
+              <span *ngIf="addressEmploymentForm.get('startDate').errors?.required">
+                City Name Required!
+              </span>
+            </span>
         </div>
         <div class="form-group col-md-6">
-          <label for="ad1">Address Line 1</label>
-          <textarea id="ad1" class="form-control" formControlName="addressLine1"></textarea>
+          <label for="ad1">Address Line 1 <span class="asterisk">*</span></label>
+          <textarea id="ad1" class="form-control" formControlName="addressLine1"
+            [ngClass]="{'is-invalid': addressEmploymentForm.get('addressLine1').errors && 
+            (addressEmploymentForm.get('addressLine1').touched || addressEmploymentForm.get('addressLine1').dirty)}"></textarea>
+          <span class="invalid-feedback">
+            <span *ngIf="addressEmploymentForm.get('addressLine1').errors?.required">
+              City Name Required!
+            </span>
+          </span>
         </div>
         <div class="form-group col-md-6">
           <label for="ad2">Address Line 2</label>
           <textarea id="ad2" class="form-control" formControlName="addressLine2"></textarea>
         </div>
         <div class="form-group col-md-6">
-          <label for="pcode">Postal Code</label>
-          <input type="text" id="pcode" class="form-control" formControlName="postCode">
+          <label for="pcode">Postal Code <span class="asterisk">*</span></label>
+          <input type="text" id="pcode" class="form-control" formControlName="postCode"
+            placeholder="Please enter postal code" [ngClass]="{'is-invalid': addressEmploymentForm.get('postCode').errors && 
+            (addressEmploymentForm.get('postCode').touched || addressEmploymentForm.get('postCode').dirty)}">
+          <span class="invalid-feedback">
+            <span *ngIf="addressEmploymentForm.get('postCode').errors?.required">
+              City Name Required!
+            </span>
+            <span *ngIf="addressEmploymentForm.get('postCode').errors?.pattern">
+              Only Numbers are allowed!
+            </span>
+            <span *ngIf="addressEmploymentForm.get('postCode').errors?.minlength || addressEmploymentForm.get('postCode').errors?.maxlength ">
+              Length should be between 5 to 7!
+            </span>
+          </span>
         </div>
         <div class="form-group col-md-6">
-          <label for="ct">City</label>
-          <input type="text" id="ct" class="form-control" formControlName="city">
+          <label for="ct">City <span class="asterisk">*</span></label>
+          <input type="text" id="ct" class="form-control" formControlName="city" placeholder="Please enter city"
+            [ngClass]="{'is-invalid': addressEmploymentForm.get('city').errors && 
+            (addressEmploymentForm.get('city').touched || addressEmploymentForm.get('city').dirty)}">
+          <span class="invalid-feedback">
+            <span *ngIf="addressEmploymentForm.get('city').errors?.required">
+              City Name Required!
+            </span>
+          </span>
         </div>
       </div>
 
@@ -61,12 +128,33 @@
           <div class="row d-flex align-items-end">
             <div class="form-group col-md-6">
               <label for="net">Net monthly income (last month's net salary, without holiday pay, year-end bonus
-                and/or other extras) or retirement pension</label>
-              <input type="text" id="net" class="form-control" formControlName="netIncome">
+                and/or other extras) or retirement pension <span class="asterisk">*</span></label>
+              <input type="text" id="net" class="form-control" formControlName="netIncome"
+                placeholder="Enter your net monthy income" [ngClass]="{'is-invalid': addressEmploymentForm.get('netIncome').errors && 
+                (addressEmploymentForm.get('netIncome').touched || addressEmploymentForm.get('netIncome').dirty)}">
+              <span class="invalid-feedback">
+                <span *ngIf="addressEmploymentForm.get('netIncome').errors?.required">
+                  City Name Required!
+                </span>
+                <span *ngIf="addressEmploymentForm.get('netIncome').errors?.pattern">
+                  Only Numbers are allowed!
+                </span>
+              </span>
             </div>
             <div class="form-group col-md-6">
-              <label for="rIncome">Rental Income</label>
-              <input type="text" id="rIncome" class="form-control" formControlName="rentalIncome">
+              <label for="rIncome">Rental Income <span class="asterisk">*</span></label>
+              <input type="text" id="rIncome" class="form-control" formControlName="rentalIncome"
+                placeholder="Please enter rental Income"
+                [ngClass]="{'is-invalid': addressEmploymentForm.get('rentalIncome').errors && 
+                (addressEmploymentForm.get('rentalIncome').touched || addressEmploymentForm.get('rentalIncome').dirty)}">
+              <span class="invalid-feedback">
+                <span *ngIf="addressEmploymentForm.get('rentalIncome').errors?.required">
+                  City Name Required!
+                </span>
+                <span *ngIf="addressEmploymentForm.get('rentalIncome').errors?.pattern">
+                  Only Numbers are allowed!
+                </span>
+              </span>
             </div>
           </div>
           <div class="row">
@@ -75,29 +163,57 @@
               <input type="file" id="ss" class="form-control-file" (change)="onFileSelected($event)">
             </div>
             <div class="form-group col-md-6">
-              <label for="ps">Property Status</label>
-              <select id="ps" name="ps" class="form-control" formControlName="propertyStatus">
+              <label for="ps">Property Status <span class="asterisk">*</span></label>
+              <select id="ps" name="ps" class="form-control" formControlName="propertyStatus"
+                [ngClass]="{'is-invalid': addressEmploymentForm.get('propertyStatus').errors && 
+            (addressEmploymentForm.get('propertyStatus').touched || addressEmploymentForm.get('propertyStatus').dirty)}">
+                <option value="" disabled="true">Select Property Status</option>
                 <option *ngFor="let item of allValues?.propertyStatuses" [ngValue]="item.name">{{item.name}}
                 </option>
               </select>
+              <span class="invalid-feedback">
+                <span *ngIf="addressEmploymentForm.get('propertyStatus').errors?.required">
+                  City Name Required!
+                </span>
+              </span>
             </div>
           </div>
           <div class="row d-flex align-items-end">
             <div class="form-group col-md-6">
               <label for="cc">Credit cost (amount of the contract subscriber's share of all outstanding
-                loans)</label>
-              <input type="text" id="cc" class="form-control" formControlName="creditCost">
+                loans) <span class="asterisk">*</span></label>
+              <input type="text" id="cc" class="form-control" formControlName="creditCost"
+                placeholder="Please enter credit cost" [ngClass]="{'is-invalid': addressEmploymentForm.get('creditCost').errors && 
+                (addressEmploymentForm.get('creditCost').touched || addressEmploymentForm.get('creditCost').dirty)}">
+              <span class="invalid-feedback">
+                <span *ngIf="addressEmploymentForm.get('creditCost').errors?.required">
+                  City Name Required!
+                </span>
+                <span *ngIf="addressEmploymentForm.get('creditCost').errors?.pattern">
+                  Only Numbers are allowed!
+                </span>
+              </span>
             </div>
             <div class="form-group col-md-6">
-              <label for="mr">Monthly rent (if you are tenant or co-tenant)</label>
-              <input type="text" id="mr" class="form-control" formControlName="monthlyRent">
+              <label for="mr">Monthly rent (if you are tenant or co-tenant) <span class="asterisk">*</span></label>
+              <input type="text" id="mr" class="form-control" formControlName="monthlyRent"
+                placeholder="Please enter monthly rent" [ngClass]="{'is-invalid': addressEmploymentForm.get('monthlyRent').errors && 
+                (addressEmploymentForm.get('monthlyRent').touched || addressEmploymentForm.get('monthlyRent').dirty)}">
+              <span class="invalid-feedback">
+                <span *ngIf="addressEmploymentForm.get('monthlyRent').errors?.required">
+                  City Name Required!
+                </span>
+                <span *ngIf="addressEmploymentForm.get('monthlyRent').errors?.pattern">
+                  Only Numbers are allowed!
+                </span>
+              </span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="text-center">
-        <button class="btn btn-success mt-3" style="width: 150px;"> <i class="fa fa-floppy-o"></i>
+        <button class="btn btn-success mt-3" style="width: 150px;" [disabled]="addressEmploymentForm.invalid"> <i class="fa fa-floppy-o"></i>
           Save</button>
       </div>
     </form>

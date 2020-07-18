@@ -3,9 +3,13 @@
   <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne"
     aria-expanded="true" aria-controls="collapseOne">
     <h2 class="mb-0">
-      <div class="row d-flex align-items-center">
-        <h6 class="col-md-11 col-11">Personal and Contact</h6>
-        <i class="fa fa-angle-down col-md-1 col-1 p-0" style="font-size:30px;"></i>
+      <div class="row d-flex align-items-center justify-content-between px-3">
+        <h6 class="">Personal and Contact</h6>
+        <div class="d-flex justify-content-right align-items-center">
+          <i *ngIf="formSaved" class="fa fa-check-circle text-success mr-2" style="font-size: 23px;"></i>
+          <i *ngIf="!formSaved" class="fa fa-times-circle-o text-danger mr-2" style="font-size: 23px;"></i>
+          <i class="fa fa-angle-down " style="font-size:30px;"></i>
+        </div>
       </div>
     </h2>
   </div>
@@ -18,7 +22,7 @@
         <h5>Personal Details</h5>
         <hr>
       </div>
-      <form [formGroup]="personalDetailForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="personalDetailForm" (ngSubmit)="onSave()">
         <div class="row mt-4">
           <div class="form-group col-md-2">
             <label for="civility">Civility</label>
@@ -40,28 +44,48 @@
             <input type="text" id="dob" name="dob" class="form-control" [ngModel]="allValues?.user.dateOfBirth"
               [ngModelOptions]="{standalone: true}" disabled>
           </div>
-          <div class="form-group col-md-6" [ngClass]="{'has-error': personalDetailForm.get('maritalStatus').errors && 
-          (personalDetailForm.get('maritalStatus').touched || personalDetailForm.get('maritalStatus').dirty)}">
-            <label for="maritalstatus">Marital Status</label>
-            <select id="maritalstatus" name="maritalstatus" formControlName="maritalStatus" class="form-control">
-              <option *ngFor="let item of allValues?.maritalStatuses" [ngValue]="item.name">{{item.name}}</option>
+          <div class="form-group col-md-6">
+            <label for="maritalstatus">Marital Status <span class="asterisk">*</span> </label>
+            <select id="maritalstatus" name="maritalstatus" formControlName="maritalStatus" class="form-control"
+              [ngClass]="{'is-invalid': personalDetailForm.get('maritalStatus').errors && 
+            (personalDetailForm.get('maritalStatus').touched || personalDetailForm.get('maritalStatus').dirty)}" placeholder="marital status">
+            <option value="" disabled="true">Select Your Marital Status</option>  
+            <option *ngFor="let item of allValues?.maritalStatuses" [ngValue]="item.name">{{item.name}}</option>
             </select>
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('maritalStatus').errors?.required">
+                Provide Marital Status!
+              </span>
+            </span>
           </div>
           <div class="form-group col-md-6">
-            <label for="nationality">Nationality</label>
-            <select id="nationality" name="nationality" formControlName="nationality" class="form-control">
+            <label for="nationality">Nationality <span class="asterisk">*</span></label>
+            <select id="nationality" name="nationality" formControlName="nationality" class="form-control " [ngClass]="{'is-invalid': personalDetailForm.get('nationality').errors && 
+              (personalDetailForm.get('nationality').touched || personalDetailForm.get('nationality').dirty)}">
+              <option value="" disabled="true">Select Your Nationality</option>  
               <option *ngFor="let item of allValues?.nationalities" [ngValue]="item.name">{{item.name}}</option>
             </select>
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('nationality').errors?.required">
+                Provide Nationality!
+              </span>
+            </span>
           </div>
-          <div class="form-group col-md-6" >
-            <label for="cns" class=" control-label">Registration Number(CNS)</label>
-            <input type="text" id="cns" class="form-control" name="registrationNumber"
-              formControlName="registrationNumber"  [ngClass]="{'is-invalid': personalDetailForm.get('registrationNumber').errors && 
+          <div class="form-group col-md-6">
+            <label for="cns" class=" control-label">Registration Number(CNS) <span class="asterisk">*</span></label>
+            <input type="text" id="cns" class="form-control" name="registrationNumber" placeholder="e.g 1354868456"
+              formControlName="registrationNumber"
+              [ngClass]="{'is-invalid': personalDetailForm.get('registrationNumber').errors && 
               (personalDetailForm.get('registrationNumber').touched || personalDetailForm.get('registrationNumber').dirty)}">
-              <span class="invalid-feedback" *ngIf=" personalDetailForm.get('registrationNumber').errors && 
-              (personalDetailForm.get('registrationNumber').touched || personalDetailForm.get('registrationNumber').dirty)">
-              <span *ngIf="personalDetailForm.get('registrationNumber').errors.required">
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('registrationNumber').errors?.required">
                 Registration Number Required!
+              </span>
+              <span *ngIf="personalDetailForm.get('registrationNumber').errors?.pattern">
+                Must be a Number!
+              </span>
+              <span *ngIf="personalDetailForm.get('registrationNumber').errors?.maxlength ">
+                Maximum 13 digits are allowed!
               </span>
             </span>
           </div>
@@ -88,8 +112,15 @@
               [ngModelOptions]="{standalone: true}" disabled>
           </div>
           <div class="form-group col-md-4">
-            <label for="add1">Address Line 1</label>
-            <textarea id="add1" class="form-control" name="addressLine1" formControlName="addressLine1"></textarea>
+            <label for="add1">Address Line 1 <span class="asterisk">*</span></label>
+            <textarea id="add1" class="form-control" name="addressLine1" formControlName="addressLine1"
+              [ngClass]="{'is-invalid': personalDetailForm.get('addressLine1').errors && 
+            (personalDetailForm.get('addressLine1').touched || personalDetailForm.get('addressLine1').dirty)}"></textarea>
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('addressLine1').errors?.required">
+                Enter Address Required!
+              </span>
+            </span>
           </div>
           <div class="form-group col-md-4">
             <label for="add2">Address Line 2</label>
@@ -100,21 +131,48 @@
             <textarea id="add3" class="form-control" name="addressLine3" formControlName="addressLine3"></textarea>
           </div>
           <div class="form-group col-md-4">
-            <label for="city">City</label>
-            <input type="text" id="city" class="form-control" name="city" formControlName="city">
+            <label for="city">City <span class="asterisk">*</span></label>
+            <input type="text" id="city" class="form-control" name="city" formControlName="city" [ngClass]="{'is-invalid': personalDetailForm.get('city').errors && 
+            (personalDetailForm.get('city').touched || personalDetailForm.get('city').dirty)}" placeholder="Please enter city">
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('city').errors?.required">
+                City Name Required!
+              </span>
+            </span>
           </div>
           <div class="form-group col-md-4">
-            <label for="code">Postal Code</label>
-            <input type="text" id="code" class="form-control" name="postCode" formControlName="postCode">
+            <label for="code">Postal Code <span class="asterisk">*</span></label>
+            <input type="text" id="code" class="form-control" name="postCode" formControlName="postCode" [ngClass]="{'is-invalid': personalDetailForm.get('postCode').errors && 
+            (personalDetailForm.get('postCode').touched || personalDetailForm.get('postCode').dirty)}" placeholder="Please enter postal code">
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('postCode').errors?.required">
+                Enter Postal Code !
+              </span>
+              <span *ngIf="personalDetailForm.get('postCode').errors?.pattern">
+                Only Numbers are allowed!
+              </span>
+              <span *ngIf="personalDetailForm.get('postCode').errors?.minlength || personalDetailForm.get('postCode').errors?.maxlength ">
+                Length should be between 5 to 7!
+              </span>
+            </span>
           </div>
           <div class="form-group col-md-4">
-            <label for="lhs">You lived here since</label>
+            <label for="lhs">You lived here since <span class="asterisk">*</span></label>
             <input id="lhs" type="text" bsDatepicker name="livedSince" class="form-control" formControlName="livedSince"
+              [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }"
+              [ngClass]="{'is-invalid': personalDetailForm.get('livedSince').errors && 
+              (personalDetailForm.get('livedSince').touched || personalDetailForm.get('livedSince').dirty)}" placeholder="DD-MM-YYY"
               [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }">
+            <span class="invalid-feedback">
+              <span *ngIf="personalDetailForm.get('livedSince').errors?.required">
+                Provide a date!
+              </span>
+            </span>
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-success mt-3" type="submit" style="width: 150px;" [disabled]="personalDetailForm.invalid"> <i class="fa fa-floppy-o"></i>
+          <button class="btn btn-success mt-3" type="submit" style="width: 150px;"
+            [disabled]="personalDetailForm.invalid"> <i class="fa fa-floppy-o"></i>
             Save</button>
         </div>
 
