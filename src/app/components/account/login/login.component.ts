@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
   seePassword: boolean = false;
 
   constructor(private accountService: AccountService,
-     private router: Router,
-     private toastr: ToastrService) { }
+    private router: Router,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     if (localStorage.getItem('token') != null) {
@@ -29,14 +31,25 @@ export class LoginComponent implements OnInit {
   }
 
   formSubmit(form: NgForm) {
+    this.spinner.show();
     this.accountService.loginUser(form.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-        this.toastr.success('You have successfully logged in !','Login Sucessfull');
-        this.router.navigateByUrl('/Home');
+        this.spinner.hide();
+        this.toastr.success('You have successfully logged in !', 'Login Sucessfull');
+        //check role
+        var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+        var userRole = payLoad.role;
+        if (userRole == 'Admin') {
+          this.router.navigateByUrl('/administrator/dashboard');
+        }
+        else {
+          this.router.navigateByUrl('/Home');
+        }
       },
       error => {
-        this.toastr.error('Username or password incorrect!','Login Fail!');
+        this.toastr.error('Username or password incorrect!', 'Login Fail!');
+        this.spinner.hide();
         console.log(error)
       }
     );

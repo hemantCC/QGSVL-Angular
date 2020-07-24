@@ -4,7 +4,7 @@
     aria-expanded="true" aria-controls="collapseOne">
     <h2 class="mb-0">
       <div class="row d-flex align-items-center justify-content-between px-3">
-        <h6 class="">Address and Employment</h6>
+        <h3 class="m-0">Address and Employment</h3>
         <div class="d-flex justify-content-right align-items-center">
           <i *ngIf="formSaved" class="fa fa-check-circle text-success mr-2" style="font-size: 23px;"></i>
           <i *ngIf="!formSaved" class="fa fa-times-circle-o text-danger mr-2" style="font-size: 23px;"></i>
@@ -15,7 +15,7 @@
   </div>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
     <form class="card-body" [formGroup]="addressEmploymentForm" (ngSubmit)="onSave()">
-      <h5>Address and Employment</h5>
+      <h3><b>Address and Employment</b></h3>
       <hr>
       <div class="row">
         <div class="form-group col-md-6">
@@ -121,10 +121,10 @@
         </div>
       </div>
 
-      <h5>Revenues and Charges</h5>
+      <h3><b>Revenues and Charges</b></h3>
       <hr>
-      <div class="row">
-        <div class="container">
+      <!-- <div class="row">
+        <div class="container"> -->
           <div class="row d-flex align-items-end">
             <div class="form-group col-md-6">
               <label for="net">Net monthly income (last month's net salary, without holiday pay, year-end bonus
@@ -209,8 +209,8 @@
               </span>
             </div>
           </div>
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
       <div class="text-center">
         <button class="btn btn-success mt-3" style="width: 150px;" [disabled]="addressEmploymentForm.invalid"> <i class="fa fa-floppy-o"></i>

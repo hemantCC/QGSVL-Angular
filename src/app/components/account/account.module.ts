@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     AccountRoutingModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
-
+    NgxSpinnerModule
   ]
 })
 export class AccountModule { }

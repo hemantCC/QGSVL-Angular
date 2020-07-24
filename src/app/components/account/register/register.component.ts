@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { dropDownValues } from 'src/app/models/creditCheck';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -24,19 +25,21 @@ export class RegisterComponent implements OnInit {
   seePassword: boolean = false;
 
   constructor(private accountService: AccountService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
   }
 
   formSubmit(form: NgForm) {
+    this.spinner.show();
     this.accountService.registerUser(form.value).subscribe(
       (res: any) => {
+        this.spinner.hide();
         this.toastr.success('You have successfully Registered!', 'Registration Sucessfull');
       },
       error => {
-        console.log(form);
-        
+        this.spinner.hide();
         this.toastr.error('Something went wrong', 'Registration Failed');
         console.log(error);
       }

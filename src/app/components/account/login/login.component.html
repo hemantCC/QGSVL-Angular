@@ -1,3 +1,9 @@
+<!-- Spinner -->
+<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+
 <div class="container-fluid px-0">
     <div class="row r1 p-0">
         <div class="col-md-6 col-sm-12 col-lg-6 pr-0 image-banner">
@@ -16,7 +22,8 @@
                             class="form-control" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
                         <div class="text-danger" *ngIf="email.touched && email.errors?.required">Email is Required!
                         </div>
-                        <div class="text-danger" *ngIf="email.touched && email.errors?.pattern">Email is Invalid!</div>
+                        <div class="text-danger" *ngIf="email.touched && email.errors?.pattern">Email is Invalid!
+                        </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="password">Password:</label>
@@ -32,7 +39,8 @@
                             </div>
                         </div>
                         <!-- <div [hidden]="!seePassword"> {{ user.Password }}</div> -->
-                        <div class="text-danger" *ngIf="password.touched && !password.valid">Password is Required!</div>
+                        <div class="text-danger" *ngIf="password.touched && !password.valid">Password is Required!
+                        </div>
                     </div>
 
                     <div class="form-group col-md-12">

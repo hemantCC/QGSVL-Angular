@@ -6,6 +6,8 @@ import { PersonalDetail } from 'src/app/models/personalDetail';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AggrementComponent } from './aggrement/aggrement.component';
+import { MatStepper } from '@angular/material/stepper';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -23,12 +25,14 @@ export class CreditCheckComponent implements OnInit {
 
   constructor(private stepService: StepService,
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private stepper: MatStepper,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.populateDropDown();
-    this.aggreed =  this.checkFormSubmittion();
-    if(this.checkFormSubmittion() && localStorage.getItem('personalDetails') != null && localStorage.getItem('address-Employment') != null ){
+    this.aggreed = this.checkFormSubmittion();
+    if (this.checkFormSubmittion() && localStorage.getItem('personalDetails') != null && localStorage.getItem('address-Employment') != null) {
       this.ok = true
     }
   }
@@ -41,8 +45,8 @@ export class CreditCheckComponent implements OnInit {
     this.aggreed = childValue;
   }
 
-  checkFormSubmittion(){
-    if(localStorage.getItem('formSubmitted') == '1'){
+  checkFormSubmittion() {
+    if (localStorage.getItem('formSubmitted') == '1') {
       return true;
     }
     else return false;
@@ -59,11 +63,14 @@ export class CreditCheckComponent implements OnInit {
   }
 
   onContinue() {
+    this.spinner.show();
     this.stepService.postCreditCheck().subscribe(
       (res) => {
-        localStorage.setItem('formSubmitted','1');
-        this.router.navigateByUrl('/step/EndOfCreditCheck');
+        this.spinner.hide();
         this.toastr.success('', 'Step-1 Completed!');
+        this.stepper.selected.completed = true;
+        localStorage.setItem('step1', 'completed');
+        this.stepper.next();
       },
       (err) => {
         console.log(err);

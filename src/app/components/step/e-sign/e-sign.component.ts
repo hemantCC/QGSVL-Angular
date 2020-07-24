@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-e-sign',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ESignComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stepper: MatStepper) { }
 
   ngOnInit() {
+  }
+
+  onFinish(){
+    this.stepper.selected.completed = true;
+    localStorage.setItem('step5', 'completed');
   }
 
 }

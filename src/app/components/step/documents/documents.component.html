@@ -1,5 +1,10 @@
-<div class="container">
-  <div class="row">
+<!-- Spinner -->
+<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<form #documentsForm="ngForm">
+  <div class="row mt-1">
 
     <div class="accordion col-md-12 col-xl-12" id="accordionExample" style="margin-top: 6%;">
       <div class="card">
@@ -7,7 +12,7 @@
           aria-controls="collapseOne">
           <h2 class="mb-0">
             <div class="row d-flex align-items-center">
-              <h6 class="col-md-11 col-11"> Documents</h6>
+              <h3 class="col-md-11 col-11 m-0"> Documents</h3>
               <i class="fa fa-angle-down col-md-1 col-1" style="font-size:30px;"></i>
             </div>
           </h2>
@@ -15,29 +20,24 @@
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
-            <form #documentsForm="ngForm">
-              <div class="form-group">
-                <div class="mt-3 mb-3"><b>Driving License</b></div>
-                <input name="DL" type="file" [(ngModel)]="documents.drivingLicense" />
-                <span style="color:red;">Max file size : 3MB</span>
-              </div>
-              <hr />
-              <div class="form-group">
-                <div class="mt-5 mb-3"><b>Certificate Of Residence</b></div>
-                <input name="COR" type="file" [(ngModel)]="documents.CertificateOfResidence" />
-                <span style="color:red;">Max file size : 3MB</span>
-              </div>
-              <hr />
-              <div class="form-group">
-                <div class="mt-5 mb-3"><b>Identification Proof</b></div>
-                <input name="IDProof" type="file" [(ngModel)]="documents.IdentityProof" />
-                <span style="color:red;">Max file size : 3MB</span>
-              </div>
-              <hr />
-              <button class="btn btn-success mt-3" style="width: 150px;" (click)="onSave($event.target.files)">
-                <i class="fa fa-floppy-o"></i> Save</button>
-
-            </form>
+            <div class="form-group">
+              <div class="mt-3 mb-3"><b>Driving License</b></div>
+              <input name="DL" type="file" #drivingLicense (change)="onChangeDrivingLicense($event.target.files)"/>
+              <span class="text-danger">Max file size : 3MB</span>
+            </div>
+            <hr />
+            <div class="form-group">
+              <div class="mt-5 mb-3"><b>Certificate Of Residence</b></div>
+              <input name="COR" type="file"  #certificateOfResidence (change)="onChangeCOR($event.target.files)" />
+              <span style="color:red;">Max file size : 3MB</span>
+            </div>
+            <hr />
+            <div class="form-group">
+              <div class="mt-5 mb-3"><b>Identification Proof</b></div>
+              <input name="IDProof" type="file" #identificationProof (change)="onChangeIdProof($event.target.files)" />
+              <span style="color:red;">Max file size : 3MB</span>
+            </div>
+            <hr />
           </div>
         </div>
       </div>
@@ -45,7 +45,8 @@
 
   </div>
   <div class="row d-flex justify-content-between px-4 mt-4 py-2">
-    <div class="btn btn-primary" routerLink='/step/direct-debit' style="width: 200px;">Previous</div>
-    <div class="btn btn-primary" routerLink='/step/e-sign' style="width: 200px;">Continue</div>
+    <button class="btn btn-primary" mat-button matStepperPrevious style="width: 200px;">Previous</button>
+    <button class="btn btn-primary" (click)="onContinue()" [disabled]="(drivingLicense.value && certificateOfResidence.value && identificationProof.value)  == ''"
+      style="width: 200px;">Continue</button>
   </div>
-</div>
+</form>

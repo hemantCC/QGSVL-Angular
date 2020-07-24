@@ -4,7 +4,7 @@
     aria-expanded="true" aria-controls="collapseOne">
     <h2 class="mb-0">
       <div class="row d-flex align-items-center justify-content-between px-3">
-        <h6 class="">Personal and Contact</h6>
+        <h3 class="m-0">Personal and Contact</h3>
         <div class="d-flex justify-content-right align-items-center">
           <i *ngIf="formSaved" class="fa fa-check-circle text-success mr-2" style="font-size: 23px;"></i>
           <i *ngIf="!formSaved" class="fa fa-times-circle-o text-danger mr-2" style="font-size: 23px;"></i>
@@ -19,7 +19,7 @@
 
       <!-- Personal Details section -->
       <div>
-        <h5>Personal Details</h5>
+        <h3><b>Personal Details</b></h3>
         <hr>
       </div>
       <form [formGroup]="personalDetailForm" (ngSubmit)="onSave()">
@@ -94,7 +94,7 @@
 
         <!-- Contact Details section -->
 
-        <h5>Contact Details</h5>
+        <h3><b>Contact Details</b></h3>
         <hr>
         <p>Your contact information will be used to discuss your application and delivery
           arrangements. Your information may be passed to a third party purely for the purposes

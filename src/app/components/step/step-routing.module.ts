@@ -12,29 +12,29 @@ const routes: Routes = [
   {
     path: '',
     component: StepComponent,
-    children: [
-      { 
-        path: 'credit-check',
-        component: CreditCheckComponent 
-      },
-      { 
-        path: 'EndOfCreditCheck',
-        component: EndOfCreditCheckComponent 
-      },
-      { 
-        path: 'direct-debit',
-        component: DirectDebitComponent 
-      },
-      { 
-        path: 'documents',
-        component: DocumentsComponent 
-      },
-      { 
-        path: 'e-sign',
-        component: ESignComponent 
-      }
+    // children: [
+    //   { 
+    //     path: 'credit-check',
+    //     component: CreditCheckComponent 
+    //   },
+    //   { 
+    //     path: 'EndOfCreditCheck',
+    //     component: EndOfCreditCheckComponent 
+    //   },
+    //   { 
+    //     path: 'direct-debit',
+    //     component: DirectDebitComponent 
+    //   },
+    //   { 
+    //     path: 'documents',
+    //     component: DocumentsComponent 
+    //   },
+    //   { 
+    //     path: 'e-sign',
+    //     component: ESignComponent 
+    //   }
 
-    ]
+    // ]
   },
 
 ];

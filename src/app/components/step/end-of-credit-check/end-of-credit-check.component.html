@@ -1,12 +1,11 @@
-<div class="container">
-  <div class="row">
+  <div class="row mt-1">
     <div class="accordion col-md-12" id="accordionExample" style="margin-top: 6%;">
       <div class="card">
         <div class="card-header" id="headingOne" type="button" data-toggle="collapse" data-target="#collapseOne"
           aria-expanded="true" aria-controls="collapseOne">
           <h2 class="mb-0">
             <div class="row d-flex align-items-center">
-              <h6 class="col-md-11">Quote Information</h6>
+              <h3 class="col-md-11 m-0">Quote Information</h3>
               <i class="fa fa-angle-down col-md-1" style="font-size:30px;"></i>
             </div>
           </h2>
@@ -29,6 +28,17 @@
               </div>
               <div class="col-md-5">
                 <div class="text-center"> <strong> Quote Details </strong></div>
+                <div class="row px-5 mt-2">
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Brand : </strong> {{ quoteDetails.brand }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Model : </strong> {{ quoteDetails.model }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Type : </strong> {{ quoteDetails.type }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>CO<sub>2</sub> Emission : </strong> {{ quoteDetails.co2Emission }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Fuel Consumption : </strong> {{ quoteDetails.fuelConsumption }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Fuel Type : </strong> {{ quoteDetails.fuelType }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Transmission : </strong> {{ quoteDetails.transmission }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Payback Time : </strong> {{ quoteDetails.paybackTime }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Total Price : </strong> {{ quoteDetails.totalPrice }}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -38,7 +48,6 @@
   </div>
   <!-- bottom Section -->
   <div class="row d-flex justify-content-between mt-4 px-2">
-    <div class="btn btn-primary" routerLink='/step/credit-check' style="width: 200px;">Previous</div>
-    <div class="btn btn-primary" routerLink='/step/direct-debit' style="width: 200px;">Continue</div>
+    <button class="btn btn-primary" mat-button matStepperPrevious style="width: 200px;">Previous</button>
+    <button class="btn btn-primary" (click)="onContinue()" style="width: 200px;">Continue</button>
   </div>
-</div>

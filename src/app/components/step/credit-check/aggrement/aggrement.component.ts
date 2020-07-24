@@ -21,7 +21,7 @@ export class AggrementComponent implements OnInit {
   }
 
   checkFormSubmittion(){
-    if(localStorage.getItem('formSubmitted') == '1'){
+    if(localStorage.getItem('step1') != null){
       return true;
     }
     else return false;

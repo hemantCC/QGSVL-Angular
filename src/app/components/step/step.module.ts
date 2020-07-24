@@ -17,7 +17,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PersonalContactDetailComponent } from './credit-check/personal-contact-detail/personal-contact-detail.component'
 import { AddressEmploymentComponent } from './credit-check/address-employment/address-employment.component';
 import { AggrementComponent } from './credit-check/aggrement/aggrement.component'
-
+import {MatStepperModule} from '@angular/material/stepper';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -40,7 +41,9 @@ import { AggrementComponent } from './credit-check/aggrement/aggrement.component
     AngularIbanModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule,
+    NgxSpinnerModule
   ]
 })
 export class StepModule { }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
 
@@ -16,8 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'admin-dashboard', canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] },
-    component: AdminDashboardComponent
+    path: 'administrator', canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] },
+    loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'account',

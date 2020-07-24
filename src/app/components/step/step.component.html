@@ -1,2 +1,25 @@
 <app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 px-0">
+            <mat-horizontal-stepper labelPosition="bottom" linear class="px-0 mt-4">
+                <mat-step label="Credit Check" [completed]="step1Completed">
+                    <app-credit-check></app-credit-check>
+                </mat-step>
+                <mat-step label="End of Credit check" [completed]="step2Completed">
+                    <app-end-of-credit-check></app-end-of-credit-check>
+                </mat-step>
+                <mat-step label="Direct Debit" [completed]="step3Completed">
+                    <app-direct-debit></app-direct-debit>
+                </mat-step>
+                <mat-step label="Documents" [completed]="step4Completed">
+                    <app-documents></app-documents>
+                </mat-step>
+                <mat-step label="E-Signature" [completed]="step5Completed">
+                    <app-e-sign></app-e-sign>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>
+<!-- <router-outlet></router-outlet> -->

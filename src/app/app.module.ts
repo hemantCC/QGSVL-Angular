@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StepModule } from './components/step/step.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -24,6 +25,7 @@ import { StepModule } from './components/step/step.module';
     ToastrModule.forRoot({
       preventDuplicates:true
     }),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

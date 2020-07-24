@@ -1,24 +1,21 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="container">
-      <div class="row">
+<!-- Spinner -->
+<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
 
-        <div class="accordion col-md-12 col-lg-12" id="accordionExample" style="margin-top: 6%;">
+<div class="row" style="margin-top: 6%;">
+  <div class="accordion col-md-12 col-lg-12" id="accordionExample">
 
-          <app-personal-contact-detail [allValues]="allValues"></app-personal-contact-detail>
-
-          <app-address-employment [allValues]="allValues"></app-address-employment>
-
-          <app-aggrement (childValue)="fetchValueFromChild($event)"></app-aggrement>
-        </div>
-      </div>
-
-      <!-- bottom Section -->
-      <div class="row d-flex justify-content-between px-3 mt-4 ">
-        <div class="btn btn-primary" routerLink='TBD' style="width: 200px;">Previous</div>
-        <button class="btn btn-primary" (click)="onContinue()" [disabled]="!(aggreed && ok)"
-         style="width: 200px;">Continue</button>
-      </div>
-    </div>
+    <app-personal-contact-detail [allValues]="allValues"></app-personal-contact-detail>
+    <app-address-employment [allValues]="allValues"></app-address-employment>
+    <app-aggrement (childValue)="fetchValueFromChild($event)"></app-aggrement>
+    
   </div>
+</div>
+
+<!-- bottom Section -->
+<div class="row d-flex justify-content-between px-3 mt-4 ">
+  <div class="btn btn-primary" routerLink='TBD' style="width: 200px;">Previous</div>
+  <button class="btn btn-primary" (click)="onContinue()" [disabled]="!(aggreed && ok)"
+    style="width: 200px;">Continue</button>
 </div>
