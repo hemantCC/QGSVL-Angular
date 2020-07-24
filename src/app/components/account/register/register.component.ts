@@ -14,7 +14,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class RegisterComponent implements OnInit {
 
   user: User = new User('','','','', null,'','');
-  // user: User = new User('');
 
   data: dropDownValues[] = [
     { id: 0, name: 'Mr.' },

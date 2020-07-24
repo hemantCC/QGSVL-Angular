@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,6 +14,7 @@ export class AdminDashboardComponent implements OnInit {
   statuses: any;
   quotes: any;
   editStatus: boolean = false;
+  selectedStatus: string = '';
 
   constructor(private adminService: AdminService) { }
 
@@ -26,7 +28,7 @@ export class AdminDashboardComponent implements OnInit {
       (res) => {
         this.statuses = res;
         console.log(res);
-        
+
       },
       err => {
         console.log(err);
@@ -43,10 +45,9 @@ export class AdminDashboardComponent implements OnInit {
       });
   }
 
-  onEdit(status){
+  onEdit(quoteId: number) {
     this.editStatus = !this.editStatus;
-    console.log(status);
-    
+    console.log(this.selectedStatus + quoteId);
   }
 
 }

@@ -1,38 +1,39 @@
 <div class="text-center display-4">Administrator Dashboard</div>
 
-<!-- <div class="row"></div> -->
-<table class="table table-striped table-bordered">
-    <thead>
-        <th>Quote Id</th>
-        <th>Vehicle</th>
-        <th>Rent Date</th>
-        <th>Payback Time</th>
-        <th>Mileage</th>
-        <th>Total Price</th>
-        <th>Status</th>
-        <th>Edit</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let quote of quotes">
-            <td>{{ quote.id }}</td>
-            <td>{{ quote.brand }} {{ quote.model }}</td>
-            <td>{{ quote.rentalDate }}</td>
-            <td>{{ quote.paybackTime }}</td>
-            <td>{{ quote.mileage }}</td>
-            <td>{{ quote.totalPrice }}</td>
-            <td>
-                <span *ngIf="!editStatus">{{ quote.quoteStatus }}</span>
-                <select class="form-control" *ngIf="editStatus" #status>
-                    <option value="" disabled="true">Select Status</option>
-                    <option *ngFor="let item of statuses" [value]="statuses.name">{{item.name}}
-                    </option>
-                </select>
-            </td>
-            <td>
-                <button class="btn btn-primary" *ngIf="!editStatus" (click)="editStatus = !editStatus"><i
-                        class="fa fa-pencil"></i> Edit</button>
-                <button class="btn btn-success" *ngIf="editStatus" (click)="onEdit()">Done</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<!-- <form #quoteForm="ngForm" (ngSubmit)="onEdit(quoteForm)"> -->
+    <table class="table table-striped table-bordered">
+        <thead>
+            <th>Quote Id</th>
+            <th>Vehicle</th>
+            <th>Rent Date</th>
+            <th>Payback Time</th>
+            <th>Mileage</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Edit</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let quote of quotes">
+                <td>{{ quote.id }}</td>
+                <td>{{ quote.brand }} {{ quote.model }}</td>
+                <td>{{ quote.rentalDate }}</td>
+                <td>{{ quote.paybackTime }}</td>
+                <td>{{ quote.mileage }}</td>
+                <td>{{ quote.totalPrice }}</td>
+                <td>
+                    <span *ngIf="!editStatus">{{ quote.quoteStatus }}</span>
+                    <select name="status" class="form-control" *ngIf="editStatus" [(ngModel)]="selectedStatus">
+                        <option value="" disabled="true">Select Status</option>
+                        <option *ngFor="let item of statuses" [value]="item.name">{{item.name}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-primary" *ngIf="!editStatus" (click)="editStatus = !editStatus"><i
+                            class="fa fa-pencil"></i> Edit</button>
+                    <button class="btn btn-success" *ngIf="editStatus" (click)="onEdit(quote.id)">Done</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<!-- </form> -->
