@@ -1,0 +1,35 @@
+/****************************
+        sidenav css
+******************************/
+mat-sidenav-container{
+    height: auto;
+}
+mat-sidenav{
+    width: 25%;
+    background-color: grey;
+}
+
+/****************************
+        card css
+******************************/
+
+.card:hover {
+    box-shadow: -1px 9px 50px -12px black;
+}
+
+.product-price {
+    background: #eb4034;
+    padding: 7px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 200;
+    color: #fff;
+    border-radius: 7px;
+    box-shadow: -10px 20px 15px -10px rgba(17,233,91,0.3);
+}    
+
+
+
+
+

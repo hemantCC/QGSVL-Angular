@@ -11,8 +11,16 @@ const routes: Routes = [
     redirectTo: '/account/login', pathMatch: 'full'
   },
   {
-    path: 'Home', canActivate: [AuthGuard],
+    path: 'Home',
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'filter',
+    loadChildren: () => import('./components/filter/filter.module').then(m => m.FilterModule)
+  },
+  {
+    path: 'vehicle-detail',
+    loadChildren: () => import('./components/vehicle-detail/vehicle-detail.module').then(m => m.VehicleDetailModule)
   },
   {
     path: 'administrator', canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] },

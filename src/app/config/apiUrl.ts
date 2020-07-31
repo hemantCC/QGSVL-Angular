@@ -11,3 +11,7 @@ export const getCurrentQuoteUrl = baseUrl + 'api/Step/GetLatestQuote';
 export const submitDocumentsUrl = baseUrl + 'api/Step/SubmitDocuments';
 export const getAllQuoteStatusUrl = baseUrl + 'api/Administrator/GetAllQuoteStatus';
 export const getAllQuotesUrl = baseUrl + 'api/Administrator/GetAllQuotes';
+export const editQuoteStatusUrl = baseUrl + 'api/Administrator/EditQuoteStatus';
+export const getVehicleFiltersUrl = baseUrl + 'api/Vehicle/GetVehicleFilters';
+export const getVehiclesUrl = baseUrl + 'api/Vehicle/GetVehicles';
+export const getVehicleUrl = baseUrl + 'api/Vehicle/GetVehicle';

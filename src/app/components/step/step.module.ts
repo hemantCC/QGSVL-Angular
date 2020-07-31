@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectDebitComponent } from './direct-debit/direct-debit.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { ESignComponent } from './e-sign/e-sign.component';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { CreditCheckComponent } from './credit-check/credit-check.component';
 import { EndOfCreditCheckComponent } from './end-of-credit-check/end-of-credit-check.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -19,13 +18,13 @@ import { AddressEmploymentComponent } from './credit-check/address-employment/ad
 import { AggrementComponent } from './credit-check/aggrement/aggrement.component'
 import {MatStepperModule} from '@angular/material/stepper';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 
 @NgModule({
   declarations: [StepComponent,
-    NavbarComponent,
     DirectDebitComponent,
     DocumentsComponent,
     ESignComponent,
@@ -43,7 +42,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
     MatStepperModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SharedModule
   ]
 })
 export class StepModule { }

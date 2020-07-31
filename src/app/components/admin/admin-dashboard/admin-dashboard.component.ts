@@ -27,8 +27,6 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.getAllQuoteStatus().subscribe(
       (res) => {
         this.statuses = res;
-        console.log(res);
-
       },
       err => {
         console.log(err);
@@ -47,7 +45,12 @@ export class AdminDashboardComponent implements OnInit {
 
   onEdit(quoteId: number) {
     this.editStatus = !this.editStatus;
-    console.log(this.selectedStatus + quoteId);
+    this.adminService.editStatus(quoteId, this.selectedStatus).subscribe((res) => {
+      this.ngOnInit();
+    },
+      err => {
+        console.log(err);
+      });
   }
 
 }

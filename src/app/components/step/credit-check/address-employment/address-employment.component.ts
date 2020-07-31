@@ -69,7 +69,7 @@ export class AddressEmploymentComponent implements OnInit {
     console.log(JSON.parse(localStorage.getItem('address-Employment')));
   }
 
-
+  //sets the saved values of form on reload
   onReload() {
     if (localStorage.getItem('address-Employment') != null) {
       let populate: employmentDetails = JSON.parse(localStorage.getItem('address-Employment'));

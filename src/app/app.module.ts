@@ -8,13 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StepModule } from './components/step/step.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
-
+import { SharedModule } from './components/shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -25,7 +23,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastrModule.forRoot({
       preventDuplicates:true
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

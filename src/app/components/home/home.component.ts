@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +10,61 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router,
-    private toastr: ToastrService) { }
+  dropDownValues: any[] = [];
+  brands: string[] = [];
+  fuelTypes: string[] = [];
+  transmission: string[] = [];
+  types: string[] = [];
+  range: any[] = [
+    { id: 1, value: 'under  349' },
+    { id: 2, value: '350 - 599' },
+    { id: 3, value: '600 - 849' },
+    { id: 4, value: '850 - 1087' },
+    { id: 5, value: 'above  1088' }]
 
-  ngOnInit(): void {
+  constructor(private router: Router,
+    private toastr: ToastrService,
+    private vehicleService: VehicleService) { }
+
+  ngOnInit() {
+    this.populateDropDown();
   }
 
-  logoutUser(){
+  populateDropDown() {
+    this.vehicleService.getVehicleFilters().subscribe((res: any) => {
+      this.dropDownValues = res;
+      console.log(this.dropDownValues);
+
+      this.dropDownValues.map(values => {
+        if (!this.brands.includes(values.brand)) {
+          this.brands.push(values.brand);
+        }
+        if (!this.fuelTypes.includes(values.fuelType)) {
+          this.fuelTypes.push(values.fuelType);
+        }
+        if (!this.types.includes(values.type)) {
+          this.types.push(values.type);
+        }
+        if (!this.transmission.includes(values.transmission)) {
+          this.transmission.push(values.transmission);
+        }
+      });
+    },
+      err => {
+        console.error(err);
+      })
+  }
+
+
+  logoutUser() {
     localStorage.removeItem('token');
-    this.toastr.success('You have successfully logged out!','Logout Sucessfull');
+    this.toastr.success('You have successfully logged out!', 'Logout Sucessfull');
     this.router.navigateByUrl('/account/login');
   }
+
+  onSearch() {
+    this.router.navigateByUrl('/filter');
+  }
+
 
 }
