@@ -16,11 +16,10 @@ export class HomeComponent implements OnInit {
   transmission: string[] = [];
   types: string[] = [];
   range: any[] = [
-    { id: 1, value: 'under  349' },
-    { id: 2, value: '350 - 599' },
-    { id: 3, value: '600 - 849' },
-    { id: 4, value: '850 - 1087' },
-    { id: 5, value: 'above  1088' }]
+    { id: 1, value: '0-249' },
+    { id: 2, value: '250-499' },
+    { id: 3, value: '500-749' },
+    { id: 4, value: '750-above' }]
 
   constructor(private router: Router,
     private toastr: ToastrService,

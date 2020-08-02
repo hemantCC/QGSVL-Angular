@@ -16,21 +16,19 @@ export class FilterComponent implements OnInit {
   filteredVehicles: any[]
   dropDownValues: any[] = [];
 
-  filters: Filters = new Filters([], [], [], []);
-  savedFilters: Filters = new Filters([], [], [], []);
+  filters: Filters = new Filters([], [], [], [], []);
+  savedFilters: Filters = new Filters([], [], [], [], []);
   range: any[] = [
-    { id: 1, value: 'under  349' },
-    { id: 2, value: '350 - 599' },
-    { id: 3, value: '600 - 849' },
-    { id: 4, value: '850 - 1087' },
-    { id: 5, value: 'above  1088' }]
+    { id: 1, value: '0-249' },
+    { id: 2, value: '250-499' },
+    { id: 3, value: '500-749' },
+    { id: 4, value: '750-above' }]
 
   constructor(private vehicleService: VehicleService,
     private router: Router) { }
 
   ngOnInit() {
     this.getData();
-    // this.initializeSelectedFilters();
   }
 
   //initializes by getting all vehicle and filter data
@@ -77,7 +75,7 @@ export class FilterComponent implements OnInit {
 
   // }
 
-  onFilter(category: string, param: string) {
+  onFilter(category: string, param: any) {
     this.filteredVehicles = []
     // if (JSON.parse(localStorage.getItem('selectedFilters')) == null) {
     //   this.savedFilters == new Filters([], [], [], []);
@@ -140,32 +138,62 @@ export class FilterComponent implements OnInit {
         }
         break;
       }
+      case 'range': {
+        const parameter = param.value;
+        const alreadyExists = this.savedFilters.range.includes(parameter);
+        if (!alreadyExists) {
+          this.savedFilters.range.push(parameter);
+        }
+        else {
+          const index = this.savedFilters.range.indexOf(parameter);
+          if (index > -1) {
+            this.savedFilters.range.splice(index, 1);
+          }
+        }
+        break;
+      }
     }
-    this.filterVehicle();
+    this.filterVehicle(param.value);
+
   }
-  
-  filterVehicle(){
+
+  filterVehicle(param: string) {
+
     this.vehicles.filter((vehicle) => {
       const typeMatch = (this.savedFilters.types.length > 0 && this.savedFilters.types.includes(vehicle.type))
         || this.savedFilters.types.length == 0 ? true : false;
-        const brandMatch = (this.savedFilters.brands.length > 0 && this.savedFilters.brands.includes(vehicle.brand))
+      const brandMatch = (this.savedFilters.brands.length > 0 && this.savedFilters.brands.includes(vehicle.brand))
         || this.savedFilters.brands.length == 0 ? true : false;
       const fuelTypeMatch = (this.savedFilters.fuelTypes.length > 0 && this.savedFilters.fuelTypes.includes(vehicle.fuelType))
-      || this.savedFilters.fuelTypes.length == 0 ? true : false;
+        || this.savedFilters.fuelTypes.length == 0 ? true : false;
       const transmissionMatch = (this.savedFilters.transmission.length > 0 && this.savedFilters.transmission.includes(vehicle.transmission))
         || this.savedFilters.transmission.length == 0 ? true : false;
-        if (typeMatch && brandMatch && fuelTypeMatch && transmissionMatch) {
-          this.filteredVehicles.push(vehicle);
-        }
-      })
-      console.log(this.savedFilters);
-      console.log(this.filteredVehicles);
-      
-      
+      const rangeMatch = (this.savedFilters.range.length > 0 && this.inRange(vehicle.price))
+        || this.savedFilters.range.length == 0 ? true : false;
+      if (typeMatch && brandMatch && fuelTypeMatch && transmissionMatch && rangeMatch) {
+        this.filteredVehicles.push(vehicle);
+      }
+    })
+    console.log(this.savedFilters);
+    console.log(this.filteredVehicles);
+
+
     //  // if No filter is selected
     //  if (this.savedFilters == null) {
     //   this.filteredVehicles = this.vehicles
     // }
+  }
+
+  inRange(value): boolean {
+    var exists: Boolean = false;
+    this.savedFilters.range.forEach((range) => {
+      range = range.replace('above', 'Infinity')
+      var arr = range.split('-')
+      if (arr[0] <= value && value <= arr[1]) {
+        exists = true
+      }
+    })
+    return (exists) ? true : false
   }
 
 }

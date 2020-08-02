@@ -37,15 +37,15 @@
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Price Range</strong>
             <div class="ml-3 col-md-12" *ngFor="let item of range">
-                <input class="mr-2" [value]="item.id" type="checkbox"> {{ item.value }}
+                <input class="mr-2" [value]="item.value" type="checkbox" (change)="onFilter('range',item)"> {{ item.value }}
             </div>
         </div>
 
     </mat-sidenav>
 
-    <!-- <mat-sidenav-content> -->
+    <mat-sidenav-content>
         <button class="btn btn-secondary mt-2 position-fixed" (click)="opened = !opened"><i class="fa fa-filter"></i></button>
-        <!-- <div class="text-center display-4" *ngIf="filteredVehicles == []">No Vehicle Found</div> -->
+        <div class="text-center display-4 mt-5" *ngIf="filteredVehicles?.length == 0">No Vehicle Match Found</div>
         <div class="row px-5 mt-3">
             <div class="col-sm-12 col-md-4 col-lg-3 car-item" *ngFor="let vehicle of filteredVehicles">
                 <div class="card mb-4" (click)="onVehicleSelection(vehicle.id)">
@@ -66,6 +66,6 @@
                 </div>
             </div>
         </div>
-    <!-- </mat-sidenav-content> -->
+    </mat-sidenav-content>
 
 </mat-sidenav-container>
