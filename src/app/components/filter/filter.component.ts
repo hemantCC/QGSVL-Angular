@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Filters } from 'src/app/models/filters';
 
@@ -36,7 +35,9 @@ export class FilterComponent implements OnInit {
     this.vehicleService.getVehicles().subscribe((res: any) => {
       this.vehicles = this.filteredVehicles = res;
       this.populateFilters(); //populate filters from vehicle details
-      console.log(this.vehicles);
+      this.initializeSelectedFilters();
+      this.filterVehicle();
+      console.log(this.filteredVehicles);
     },
       (err) => {
         console.error(err);
@@ -65,37 +66,31 @@ export class FilterComponent implements OnInit {
     this.router.navigateByUrl('/vehicle-detail');
   }
 
-  // initializeSelectedFilters() {
-  //   if (JSON.parse(localStorage.getItem('selectedFilters')) == null) {
-  //     this.savedFilters == new Filters([], [], [], []);
-  //   }
-  //   else {
-  //     this.savedFilters = JSON.parse(localStorage.getItem('selectedFilters'));
-  //   }
-
-  // }
+  initializeSelectedFilters() {
+    this.filteredVehicles = [];
+    if (JSON.parse(localStorage.getItem('selectedFilters')) == null) {
+      this.savedFilters == new Filters([], [], [], [], []);
+      // this.filteredVehicles = this.vehicles; 
+    }
+    else {
+      this.savedFilters = JSON.parse(localStorage.getItem('selectedFilters'));
+      // this.filterVehicle();
+    }
+  }
 
   onFilter(category: string, param: any) {
-    this.filteredVehicles = []
-    // if (JSON.parse(localStorage.getItem('selectedFilters')) == null) {
-    //   this.savedFilters == new Filters([], [], [], []);
-    // }
-    // else {
-    //   this.savedFilters = JSON.parse(localStorage.getItem('selectedFilters'));
-    // }
+    this.initializeSelectedFilters();
     switch (category) {
       case 'type': {
         const alreadyExists = this.savedFilters.types.includes(param);
         if (!alreadyExists) {
           this.savedFilters.types.push(param);
-          // localStorage.setItem('selectedFilters', JSON.stringify(this.savedFilters));
         }
         else {
           const index = this.savedFilters.types.indexOf(param);
           if (index > -1) {
             this.savedFilters.types.splice(index, 1);
           }
-          // localStorage.setItem('selectedFilters', JSON.stringify(this.savedFilters));
         }
         break;
       }
@@ -153,13 +148,14 @@ export class FilterComponent implements OnInit {
         break;
       }
     }
-    this.filterVehicle(param.value);
+    localStorage.setItem('selectedFilters', JSON.stringify(this.savedFilters));
+    console.log(JSON.parse(localStorage.getItem('selectedFilters')));
 
+    this.filterVehicle();
   }
 
-  filterVehicle(param: string) {
-
-    this.vehicles.filter((vehicle) => {
+  filterVehicle() {
+    this.vehicles?.filter((vehicle) => {
       const typeMatch = (this.savedFilters.types.length > 0 && this.savedFilters.types.includes(vehicle.type))
         || this.savedFilters.types.length == 0 ? true : false;
       const brandMatch = (this.savedFilters.brands.length > 0 && this.savedFilters.brands.includes(vehicle.brand))
@@ -168,20 +164,14 @@ export class FilterComponent implements OnInit {
         || this.savedFilters.fuelTypes.length == 0 ? true : false;
       const transmissionMatch = (this.savedFilters.transmission.length > 0 && this.savedFilters.transmission.includes(vehicle.transmission))
         || this.savedFilters.transmission.length == 0 ? true : false;
-      const rangeMatch = (this.savedFilters.range.length > 0 && this.inRange(vehicle.price))
-        || this.savedFilters.range.length == 0 ? true : false;
+      const rangeMatch = (this.savedFilters.range?.length > 0 && this.inRange(vehicle.price))
+        || this.savedFilters.range?.length == 0 ? true : false;
       if (typeMatch && brandMatch && fuelTypeMatch && transmissionMatch && rangeMatch) {
         this.filteredVehicles.push(vehicle);
       }
     })
-    console.log(this.savedFilters);
     console.log(this.filteredVehicles);
-
-
-    //  // if No filter is selected
-    //  if (this.savedFilters == null) {
-    //   this.filteredVehicles = this.vehicles
-    // }
+    
   }
 
   inRange(value): boolean {
@@ -194,6 +184,12 @@ export class FilterComponent implements OnInit {
       }
     })
     return (exists) ? true : false
+  }
+
+  onResetFilters(){
+    localStorage.removeItem('selectedFilters');
+    this.savedFilters = new Filters([],[],[],[],[]);
+    this.filteredVehicles = this.vehicles;
   }
 
 }

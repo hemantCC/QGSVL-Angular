@@ -19,8 +19,9 @@
                                 <ul class="collapse list-unstyled" id="pageSubmenu2" style="color:aliceblue;background-color: black;">
                                     <li>
                                         <div id="typeList" class="d-flex flex-column">
-                                            <span class="ml-3"  *ngFor="let item of types">
-                                                <input class="mr-2" name="brand" [value]="item" type="checkbox">
+                                            <span class="ml-3"  *ngFor="let item of filters.types">
+                                                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilterChange('type',item)"
+                                                [checked]="savedFilters.types.includes(item)">
                                                 <strong>{{item}}</strong>
                                             </span>
                                         </div>
@@ -34,8 +35,9 @@
                                 <ul class="collapse list-unstyled " id="homeSubmenu" style="color:aliceblue;background-color: black;">
                                     <li>
                                         <div id="brandList" class="d-flex flex-column">
-                                            <span class="ml-3" *ngFor="let item of brands">
-                                                <input class="mr-2" name="brand" [value]="item" type="checkbox">
+                                            <span class="ml-3" *ngFor="let item of filters.brands">
+                                                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilterChange('brand',item)"
+                                                 [checked]="savedFilters.brands.includes(item)">
                                                 <strong>{{item}}</strong>
                                             </span>
                                         </div>
@@ -51,8 +53,9 @@
                                 <ul class="collapse list-unstyled" id="pageSubmenu" style="color:aliceblue;background-color: black;">
                                     <li>
                                         <div id="fuelList" class="d-flex flex-column">
-                                            <span class="ml-3" *ngFor="let item of fuelTypes">
-                                                <input class="mr-2" name="brand" [value]="item" type="checkbox">
+                                            <span class="ml-3" *ngFor="let item of filters.fuelTypes">
+                                                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilterChange('fuelType',item)"
+                                                [checked]="savedFilters.fuelTypes.includes(item)">
                                                 <strong>{{item}}</strong>
                                             </span>
                                         </div>
@@ -68,8 +71,9 @@
                                 <ul class="collapse list-unstyled" id="pageSubmenu1" style="color:aliceblue;background-color: black;">
                                     <li>
                                         <div id="transmissionList" class="d-flex flex-column">
-                                            <span class="ml-3" *ngFor="let item of transmission">
-                                                <input class="mr-2" name="brand" [value]="item" type="checkbox">
+                                            <span class="ml-3" *ngFor="let item of filters.transmission">
+                                                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilterChange('transmission',item)"
+                                                [checked]="savedFilters.transmission.includes(item)">
                                                 <strong>{{item}}</strong>
                                             </span>
                                         </div>
@@ -86,7 +90,8 @@
                                     <li>
                                         <div id="rangeList" class="d-flex flex-column">
                                             <span class="ml-3" *ngFor="let item of range">
-                                                <input class="mr-2" name="brand" [value]="item.id" type="checkbox">
+                                                <input class="mr-2" [value]="item.id" type="checkbox" (change)="onFilterChange('range',item)"
+                                                [checked]="savedFilters.range.includes(item.value)">
                                                 <strong>{{item.value}}</strong>
                                             </span>
                                         </div>

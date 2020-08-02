@@ -9,37 +9,45 @@
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Vehicle Type</strong>
             <div class="ml-3 col-md-12" *ngFor="let item of filters.types">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('type',item)" > {{ item }}
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('type',item)" 
+                [checked]="savedFilters.types.includes(item)"> {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Brands</strong>
             <div class="ml-3 col-md-12" *ngFor="let item of filters.brands">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('brand',item)"> {{ item }}
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('brand',item)"
+                [checked]="savedFilters.brands.includes(item)"> {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Fuel Type</strong>
             <div class="ml-3 col-md-12" *ngFor="let item of filters.fuelTypes">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('fuelType',item)"> {{ item }}
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('fuelType',item)"
+                [checked]="savedFilters.fuelTypes.includes(item)"> {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Transmission</strong>
             <div class="ml-3 col-md-12" *ngFor="let item of filters.transmission">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('transmission',item)"> {{ item }}
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('transmission',item)"
+                [checked]="savedFilters.transmission.includes(item)"> {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Price Range</strong>
             <div class="ml-3 col-md-12" *ngFor="let item of range">
-                <input class="mr-2" [value]="item.value" type="checkbox" (change)="onFilter('range',item)"> {{ item.value }}
+                <input class="mr-2" [value]="item.value" type="checkbox" (change)="onFilter('range',item)"
+                [checked]="savedFilters.range.includes(item.value)"> {{ item.value }}
             </div>
         </div>
+        <div class="text-center mt-3">
+             <div class="btn btn-danger" (click)="onResetFilters()"><i class="fa fa-trash mr-2"></i>Reset Filters</div>
+            </div>
 
     </mat-sidenav>
 
