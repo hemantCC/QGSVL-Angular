@@ -1,0 +1,9 @@
+.class-accepted{
+    color: green;
+}
+.class-rejected{
+    color: red;
+}
+.class-pending{
+    color: orange;
+}

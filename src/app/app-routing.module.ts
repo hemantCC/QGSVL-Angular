@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
+import { UserQuotesComponent } from './components/user-quotes/user-quotes.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'vehicle-detail',
     loadChildren: () => import('./components/vehicle-detail/vehicle-detail.module').then(m => m.VehicleDetailModule)
+  },
+  {
+    path: 'user-quotes',
+    component: UserQuotesComponent
   },
   {
     path: 'administrator', canActivate: [AuthGuard], data: { permittedRoles: ['Admin'] },

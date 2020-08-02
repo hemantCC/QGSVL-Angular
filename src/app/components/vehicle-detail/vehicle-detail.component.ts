@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -23,19 +26,21 @@ export class VehicleDetailComponent implements OnInit {
   ];
 
   constructor(private vehicleService: VehicleService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.initializeData();
   }
 
-  changePaybackTime(event){
+  changePaybackTime(event) {
     console.log(event.target.value);
     this.paybackTime = event.target.value;
-    
+
   }
 
-  changeMileage(event){
+  changeMileage(event) {
     console.log(event.target.value * 1000);
     this.mileage = event.target.value * 1000;
   }
@@ -47,17 +52,41 @@ export class VehicleDetailComponent implements OnInit {
       this.router.navigateByUrl('/filter');
     }
     else {
-      this.vehicleService.getVehicleById(id).subscribe((res: any)=>{
+      this.vehicleService.getVehicleById(id).subscribe((res: any) => {
         console.log(res);
         this.vehicle = res.vehicle;
         this.mainEquipments = res.mainEquipments;
         this.standardEquipments = res.standardEquipments;
         this.includedServices = res.includedServices;
       },
-      err =>{
-        console.error(err);
-      });
+        err => {
+          console.error(err);
+        });
     }
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    let dialogObj = this.dialog.open(ViewQuotationComponent, { data: { vehicle: this.vehicle }
+      , disableClose: true, autoFocus: true });
+
+
+    dialogObj.afterClosed().subscribe(result => {
+      if (result == 'false') {
+        if (this.userLoggedin()) {
+          this.toastr.success('After approval you may proceed!', 'Order Request sent');
+          this.router.navigateByUrl('/user-quotes');
+        }
+        else {
+          this.toastr.warning('You need to be logged in to continue process.', 'Please Login!');
+        }
+      }
+    })
+  }
+
+  userLoggedin() {
+    return (localStorage.getItem('token') != null) ? true : false;
   }
 
 }

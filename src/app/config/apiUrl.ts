@@ -15,3 +15,4 @@ export const editQuoteStatusUrl = baseUrl + 'api/Administrator/EditQuoteStatus';
 export const getVehicleFiltersUrl = baseUrl + 'api/Vehicle/GetVehicleFilters';
 export const getVehiclesUrl = baseUrl + 'api/Vehicle/GetVehicles';
 export const getVehicleUrl = baseUrl + 'api/Vehicle/GetVehicle';
+export const getUserQuotesUrl = baseUrl + 'api/Quote/GetUserQuotes';

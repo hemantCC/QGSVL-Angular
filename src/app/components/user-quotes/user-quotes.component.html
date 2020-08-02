@@ -1,0 +1,64 @@
+<!-- navigation bar -->
+<app-navbar></app-navbar>
+
+<div class="display-4 text-center mb-5 mt-2">My Quotes</div>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let item of quotes;let i = index ">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Quote - {{ i + 1 }}</mat-panel-title>
+      <mat-panel-description>{{ item.date | date}}</mat-panel-description>
+      <span class="mr-3"><strong>Status: </strong>
+        <b [ngClass]="{'class-pending':item.quoteStatus.name === 'Pending',
+        'class-accepted':item.quoteStatus.name === 'Accepted',
+        'class-rejected':item.quoteStatus.name === 'Rejected'}">
+         {{ item.quoteStatus.name }}</b>
+        </span>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+
+      <div class="row align-items-center">
+        <div class="col-md-5  p-0">
+          <img src="/assets/images/vehicles/{{ item.car.image}}" alt="order Image" width="100%">
+        </div>
+
+        <div class="col-md-7">
+          <div class="row justify-context-between">
+            <div class="col-md-6">
+              <div class="col-12 my-1">{{ item.car.brand }} {{ item.car.modelName }}</div>
+              <div class="col-12 my-1">{{ item.car.fuelType }} | {{ item.car.transmission }} |
+                {{item.mileage.mileageInKms}} Km </div>
+              <div class="col-12 my-1">{{ item.car.horsepower }} HP | {{ item.car.cO2Emission }} g/Km |
+                {{ item.car.colour }}</div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="col-12 my-1">Per Month Including VAT</div>
+              <div class="col-12 my-1"><i class="fa fa-check"
+                  style="color: green;"></i>{{ item.paybackTime.paybackInMonths }} Months</div>
+              <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i>{{item.mileage.mileageInKms}}
+                Kms per Annum</div>
+            </div>
+          </div>
+
+          <h2 class="m-0">Personal Contract Hire</h2>
+          <p class="p-0 m-0 pl-3">straight forward hire product where you hand the car back at the end of your
+            agreement.</p>
+
+          <h2 class="">Your Quote</h2>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Monthly Payment of 10449 &euro;
+          </div>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Mileage Per Annum :
+            {{item.mileage.mileageInKms}} Km </div>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Duration of Agreement :
+            {{ item.paybackTime.paybackInMonths }} Months</div>
+        </div>
+      </div>
+    </ng-template>
+    <mat-action-row>
+      <button class="btn btn-primary" routerLink="/step" [disabled]="item.quoteStatus.name != 'Accepted'">Proceed</button>
+    </mat-action-row>
+
+  </mat-expansion-panel>
+</mat-accordion>

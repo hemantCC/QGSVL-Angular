@@ -1,0 +1,37 @@
+<div mat-dialog-title class="display-4 text-center">Your Quotation</div>
+<mat-dialog-content>
+  <div class="row align-items-center">
+    <div class="col-md-5  p-0">
+      <img src="/assets/images/vehicles/{{ data.vehicle.image }}" alt="order Image" width="100%">
+    </div>
+    <div class="col-md-7">
+      <div class="row justify-context-between">
+        <div class="col-md-6">
+          <div class="col-12 my-1">{{ data.vehicle.brand }} {{ data.vehicle.modelName }}</div>
+          <div class="col-12 my-1">{{ data.vehicle.fuelType }} | {{ data.vehicle.transmission }} | 0 Km </div>
+          <div class="col-12 my-1">{{ data.vehicle.horsepower }} HP | {{ data.vehicle.cO2Emission }} g/Km |
+            {{ data.vehicle.colour }}</div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="col-12 my-1">Per Month Including VAT</div>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Months</div>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Kms per Annum</div>
+        </div>
+      </div>
+      <h2 class="m-0">Personal Contract Hire</h2>
+      <p class="p-0 m-0 pl-3">straight forward hire product where you hand the car back at the end of your
+        agreement.</p>
+
+      <h2 class="">Your Quote</h2>
+      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Monthly Payment of 10449 &euro;</div>
+      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Mileage Per Annum : 10000 Km </div>
+      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Duration of Agreement : 24 Months</div>
+
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div class="btn btn-danger mr-2" mat-dialog-close="true">Close</div>
+  <div class="btn btn-primary" mat-dialog-close="false">Next Step</div>
+</mat-dialog-actions>

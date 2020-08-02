@@ -8,29 +8,29 @@
 
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Vehicle Type</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of types">
-                <input class="mr-2" [value]="item" type="checkbox"> {{ item }}
+            <div class="ml-3 col-md-12" *ngFor="let item of filters.types">
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('type',item)" > {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Brands</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of brands">
-                <input class="mr-2" [value]="item" type="checkbox"> {{ item }}
+            <div class="ml-3 col-md-12" *ngFor="let item of filters.brands">
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('brand',item)"> {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Fuel Type</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of types">
-                <input class="mr-2" [value]="item" type="checkbox"> {{ item }}
+            <div class="ml-3 col-md-12" *ngFor="let item of filters.fuelTypes">
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('fuelType',item)"> {{ item }}
             </div>
         </div>
         <hr>
         <div class="row">
             <strong class="ml-5 mb-2" style="font-size: 16px;">Transmission</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of transmission">
-                <input class="mr-2" [value]="item" type="checkbox"> {{ item }}
+            <div class="ml-3 col-md-12" *ngFor="let item of filters.transmission">
+                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('transmission',item)"> {{ item }}
             </div>
         </div>
         <hr>
@@ -43,14 +43,16 @@
 
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <!-- <mat-sidenav-content> -->
         <button class="btn btn-secondary mt-2 position-fixed" (click)="opened = !opened"><i class="fa fa-filter"></i></button>
+        <!-- <div class="text-center display-4" *ngIf="filteredVehicles == []">No Vehicle Found</div> -->
         <div class="row px-5 mt-3">
-            <div class="col-sm-12 col-md-4 col-lg-3 car-item" *ngFor="let vehicle of vehicles">
+            <div class="col-sm-12 col-md-4 col-lg-3 car-item" *ngFor="let vehicle of filteredVehicles">
                 <div class="card mb-4" (click)="onVehicleSelection(vehicle.id)">
                     <img src="/assets/images/vehicles/{{ vehicle.image }}" class="card-img-top" style="height:224px" />
                     <div class="card-body serif">
                         <h4 class="text-center" style="height:50px">{{ vehicle.modelName }}</h4><br>
+                        <strong>Vehicle Type: </strong> {{ vehicle.type }}<br>
                         <strong>Fuel Type: </strong> {{ vehicle.fuelType }}<br>
                         <strong>Gear Box: </strong>{{ vehicle.transmission }}<br>
                         <strong>CO2: </strong>{{ vehicle.cO2Emission }}<br>
@@ -64,6 +66,6 @@
                 </div>
             </div>
         </div>
-    </mat-sidenav-content>
+    <!-- </mat-sidenav-content> -->
 
 </mat-sidenav-container>

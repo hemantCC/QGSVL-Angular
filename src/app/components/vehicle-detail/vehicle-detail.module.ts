@@ -6,16 +6,20 @@ import { SharedModule } from '../shared/shared.module';
 import { VehicleDetailComponent } from './vehicle-detail.component';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
 
 
 @NgModule({
-  declarations: [VehicleDetailComponent],
+  declarations: [VehicleDetailComponent,
+  ViewQuotationComponent],
   imports: [
     CommonModule,
     VehicleDetailRoutingModule,
     SharedModule,
     FormsModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    MatDialogModule
   ]
 })
 export class VehicleDetailModule { }  
