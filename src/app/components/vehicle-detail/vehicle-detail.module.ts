@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { VehicleDetailRoutingModule } from './vehicle-detail-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { VehicleDetailComponent } from './vehicle-detail.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
@@ -19,7 +19,8 @@ import { ViewQuotationComponent } from './view-quotation/view-quotation.componen
     SharedModule,
     FormsModule,
     BsDatepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ]
 })
 export class VehicleDetailModule { }  

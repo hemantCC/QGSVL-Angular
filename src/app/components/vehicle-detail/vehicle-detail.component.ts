@@ -4,6 +4,8 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -25,13 +27,32 @@ export class VehicleDetailComponent implements OnInit {
     { id: 3, name: 'Dr.' }
   ];
 
+  vehicleDetailForm: FormGroup;
+
   constructor(private vehicleService: VehicleService,
     private router: Router,
     private dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder) {
+    this.vehicleDetailForm = formBuilder.group({
+      paybackTime: [''],
+      mileage: [''],
+      isMainDriver: [''],
+      prefix: [''],
+      firstName: [''],
+      lastName: [''],
+      dateOfBirth: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit() {
     this.initializeData();
+    this.vehicleDetailForm.patchValue({
+      paybackTime: 24,
+      mileage: 10,
+      isMainDriver: 'true',
+      // prefix: 'Mr.'
+    })
   }
 
   changePaybackTime(event) {
@@ -68,14 +89,19 @@ export class VehicleDetailComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
-    let dialogObj = this.dialog.open(ViewQuotationComponent, { data: { vehicle: this.vehicle }
-      , disableClose: true, autoFocus: true });
+    let dialogObj = this.dialog.open(ViewQuotationComponent, {
+      data: { vehicle: this.vehicle, paybackTime: this.vehicleDetailForm.value.paybackTime ,
+      mileage: this.vehicleDetailForm.value.mileage }
+      , disableClose: true, autoFocus: true
+    });
 
 
     dialogObj.afterClosed().subscribe(result => {
       if (result == 'false') {
         if (this.userLoggedin()) {
           this.toastr.success('After approval you may proceed!', 'Order Request sent');
+          console.log(this.vehicleDetailForm.value);
+
           this.router.navigateByUrl('/user-quotes');
         }
         else {
@@ -85,8 +111,9 @@ export class VehicleDetailComponent implements OnInit {
     })
   }
 
-  userLoggedin() {
+  userLoggedin(): Boolean {
     return (localStorage.getItem('token') != null) ? true : false;
   }
+
 
 }

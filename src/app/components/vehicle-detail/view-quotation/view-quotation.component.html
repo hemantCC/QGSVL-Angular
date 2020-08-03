@@ -8,15 +8,15 @@
       <div class="row justify-context-between">
         <div class="col-md-6">
           <div class="col-12 my-1">{{ data.vehicle.brand }} {{ data.vehicle.modelName }}</div>
-          <div class="col-12 my-1">{{ data.vehicle.fuelType }} | {{ data.vehicle.transmission }} | 0 Km </div>
+          <div class="col-12 my-1">{{ data.vehicle.fuelType }} | {{ data.vehicle.transmission }} | {{ data.mileage * 1000 }} Kms </div>
           <div class="col-12 my-1">{{ data.vehicle.horsepower }} HP | {{ data.vehicle.cO2Emission }} g/Km |
             {{ data.vehicle.colour }}</div>
         </div>
 
         <div class="col-md-6">
           <div class="col-12 my-1">Per Month Including VAT</div>
-          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Months</div>
-          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Kms per Annum</div>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i>{{ data.paybackTime }} Months</div>
+          <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i>{{ data.mileage * 1000 }} Kms per Annum</div>
         </div>
       </div>
       <h2 class="m-0">Personal Contract Hire</h2>
@@ -25,8 +25,8 @@
 
       <h2 class="">Your Quote</h2>
       <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Monthly Payment of 10449 &euro;</div>
-      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Mileage Per Annum : 10000 Km </div>
-      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Duration of Agreement : 24 Months</div>
+      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Mileage Per Annum : {{ data.mileage * 1000 }} Kms </div>
+      <div class="col-12 my-1"><i class="fa fa-check" style="color: green;"></i> Duration of Agreement : {{ data.paybackTime }} Months</div>
 
     </div>
   </div>
