@@ -5,7 +5,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { FormsModule } from '@angular/forms';
-
+import { MatTableModule } from '@angular/material/table'
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,11 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

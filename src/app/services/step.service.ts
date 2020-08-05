@@ -32,14 +32,10 @@ export class StepService {
     let directDebitValue: DirectDebit = new DirectDebit(data, 1);
     console.log(directDebitValue);
 
-    return this.http.post(directDebitUrl, directDebitValue, { headers: this.getTokenHeader() });
+    return this.http.post(directDebitUrl, directDebitValue);
   }
   creditCheckValues(): Observable<CreditCheckValues> {
-    return this.http.get<CreditCheckValues>(creditCheckValuesUrl, { headers: this.getTokenHeader() });
-  }
-
-  getTokenHeader(): HttpHeaders {
-    return new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') });
+    return this.http.get<CreditCheckValues>(creditCheckValuesUrl);
   }
 
   postCreditCheck() {
@@ -50,11 +46,11 @@ export class StepService {
       EmploymentDetails: this.employmentDetails
     };
     console.log(this.data);
-    return this.http.post(creditCheckUrl, this.data, { headers: this.getTokenHeader() });
+    return this.http.post(creditCheckUrl, this.data);
   }
 
   getCurrentQuote() {
-    return this.http.get(getCurrentQuoteUrl, { headers: this.getTokenHeader() });
+    return this.http.get(getCurrentQuoteUrl);
   }
 
   postDocuments(drivingLicense: File, certificateOfResidence: File, identificationProof: File) {
@@ -62,7 +58,7 @@ export class StepService {
     formData.append('drivingLicense', drivingLicense, drivingLicense.name);
     formData.append('certificateOfResidence', certificateOfResidence, certificateOfResidence.name);
     formData.append('identificationProof', identificationProof, identificationProof.name);
-    return this.http.post(submitDocumentsUrl, formData, { headers: this.getTokenHeader() });
+    return this.http.post(submitDocumentsUrl, formData);
   }
 
 }

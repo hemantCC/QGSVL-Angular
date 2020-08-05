@@ -6,16 +6,22 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/Home">Home</a>
+        <a class="nav-link" routerLink="/Home"><i class="fa fa-home"></i> Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/user-quotes">My Quotes</a>
+        <a class="nav-link" routerLink="/user-quotes" [hidden]="!userExist || isAdmin">My Quotes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">What is Private Lease</a>
+        <a class="nav-link" routerLink="/administrator/dashboard" [hidden]="!isAdmin"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/administrator/users" [hidden]="!isAdmin">Users</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="/assets/pdfs/what-is-private-lease.pdf" target="_blank">What is Private Lease</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">FAQ</a>
+        <a class="nav-link" href="/assets/pdfs/FAQ.pdf" target="_blank">FAQ</a>
       </li>
     </ul>
     <ul class="navbar-nav">

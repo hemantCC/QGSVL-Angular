@@ -1,23 +1,23 @@
-<!-- Spinner -->
-<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
-  <p style="color: white"> Loading... </p>
-</ngx-spinner>
 
 <form #documentsForm="ngForm">
   <div class="row mt-1">
-
+    
     <div class="accordion col-md-12 col-xl-12" id="accordionExample" style="margin-top: 6%;">
       <div class="card">
         <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
           aria-controls="collapseOne">
           <h2 class="mb-0">
-            <div class="row d-flex align-items-center">
-              <h3 class="col-md-11 col-11 m-0"> Documents</h3>
-              <i class="fa fa-angle-down col-md-1 col-1" style="font-size:30px;"></i>
+            <div class="row d-flex align-items-center justify-content-between px-3">
+              <h3 class="m-0">Documents</h3>
+              <div class="d-flex justify-content-right align-items-center">
+                <span *ngIf="formSaved" class="text-success mr-2" style="font-size: 15px;">Complete</span>
+                <span *ngIf="!formSaved" class="text-danger mr-2" style="font-size: 15px;">Incomplete</span>  
+                <i class="fa fa-angle-down " style="font-size:30px;"></i>
+              </div>
             </div>
           </h2>
         </div>
-
+        
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
             <div class="form-group">
@@ -48,5 +48,11 @@
     <button class="btn btn-primary" mat-button matStepperPrevious style="width: 200px;">Previous</button>
     <button class="btn btn-primary" (click)="onContinue()" [disabled]="(drivingLicense.value && certificateOfResidence.value && identificationProof.value)  == ''"
       style="width: 200px;">Continue</button>
-  </div>
+    </div>
 </form>
+
+
+    <!-- Spinner -->
+    <ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
+      <p style="color: white"> Loading... </p>
+    </ngx-spinner>

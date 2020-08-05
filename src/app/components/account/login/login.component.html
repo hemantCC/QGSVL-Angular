@@ -19,7 +19,8 @@
                     <div class="form-group col-md-12">
                         <label for="email">Email:</label>
                         <input id="email" type="text" name="Email" #email="ngModel" [(ngModel)]="user.Email"
-                            class="form-control" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+                            class="form-control" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                            placeholder="email">
                         <div class="text-danger" *ngIf="email.touched && email.errors?.required">Email is Required!
                         </div>
                         <div class="text-danger" *ngIf="email.touched && email.errors?.pattern">Email is Invalid!
@@ -29,7 +30,7 @@
                         <label for="password">Password:</label>
                         <div class="input-group mb-3">
                             <input id="password" type="{{seePassword?'text':'password'}}" name="Password"
-                                #password="ngModel" [(ngModel)]="user.Password" class="form-control" required>
+                                #password="ngModel" [(ngModel)]="user.Password" class="form-control" required placeholder="password">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="{{seePassword?'fa fa-eye':'fa fa-eye-slash'}}"

@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 
-<div class="row mt-5">
-    <div class="col-md-6 pl-5 pt-5">
-        <div class="col-md-12" style="font-size: 23px; font-family: helvetica;"><b> Customize your Order </b></div>
-        <div class="col-md-12 mt-4"><b>Payback Time :</b> {{ paybackTime }}</div>
-        <div class="col-md-12"><b>Mileage :</b> {{ mileage }}</div>
-        <div class="col-md-12"><b>Total Price :</b> </div>
+<div class="row mt-5 d-flex align-items-center">
+    <div class="col-md-6 content-1">
+            <div class="col-md-12" style="font-size: 23px; font-family: helvetica;"><b> Customize your Order </b></div>
+            <div class="col-md-12 mt-4"><b>Payback Time :</b> {{ paybackTime }} Months</div>
+            <div class="col-md-12"><b>Mileage :</b> {{ mileage }} Kms</div>
+            <div class="col-md-12"><b>Total Price :</b>&euro; {{ totalPrice }}</div>
     </div>
-    <div class="col-md-6">
-        <img class="my-3" src="/assets/images/vehicles/{{ vehicle?.image }}">
+    <div class="col-md-6" *ngIf="vehicle?.image">
+        <img class="my-3" class=""  src="/assets/images/vehicles/{{ vehicle?.image }}">
     </div>
 </div>
 
@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12"><b>Current Price</b></div>
-                            <div class="col-md-12">&euro;</div>
+                            <div class="col-md-12">&euro; {{ totalPrice }}</div>
                             <div class="col-md-12 mt-4">
                                 <label for="paybackTimeRange" class="col-md-12"><b>Payback Time (Months)</b></label>
                                 <input type="range" class="custom-range col-md-8" min="24" max="60" step="12"
@@ -70,8 +70,9 @@
                         <div class="row d-flex align-items-center justify-content-between px-3">
                             <h3 class="m-0">Insurance</h3>
                             <div class="d-flex justify-content-right align-items-center">
-                                <span style="color: red;" *ngIf="vehicleDetailForm.invalid">Incomplete</span>
-                                <span style="color: green;" *ngIf="!vehicleDetailForm.invalid">Complete</span>
+                                <span style="color: red;" *ngIf="vehicleDetailForm.invalid || !formSubmitted">Not
+                                    Submitted</span>
+                                <span style="color: green;" *ngIf="formSubmitted">Submitted</span>
                                 <i class="fa fa-angle-down ml-2" style="font-size:30px;"></i>
                             </div>
                         </div>
@@ -110,7 +111,8 @@
                                 <label for="dDate"><b>Driver's Date of Birth</b></label>
                                 <input id="dDate" type="text" bsDatepicker class="form-control"
                                     [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }"
-                                    placeholder="DD-MM-YYY" formControlName="dateOfBirth" [ngClass]="{'is-invalid': vehicleDetailForm.get('dateOfBirth').errors && 
+                                    placeholder="DD-MM-YYY" formControlName="dateOfBirth"
+                                    [ngClass]="{'is-invalid': vehicleDetailForm.get('dateOfBirth').errors && 
                                     (vehicleDetailForm.get('dateOfBirth').touched || vehicleDetailForm.get('dateOfBirth').dirty)}">
                                 <span class="invalid-feedback">
                                     <span *ngIf="vehicleDetailForm.get('dateOfBirth').errors?.required">
@@ -239,7 +241,13 @@
         </div>
     </div>
 
-    <button class="btn btn-primary float-right mt-3 mr-2" [disabled]="vehicleDetailForm.invalid" (click)="openDialog()">Next Step</button>
+    <button class="btn btn-primary float-right mt-3 mr-2" [disabled]="vehicleDetailForm.invalid"
+        (click)="openDialog()">Next Step</button>
 
 
 </form>
+
+<!-- Spinner -->
+<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StepService } from 'src/app/services/step.service';
-import { CreditCheckValues, dropDownValues } from 'src/app/models/creditCheck';
-import { FormGroup, FormControl, NgForm, FormBuilder } from '@angular/forms';
+import { CreditCheckValues } from 'src/app/models/creditCheck';
 import { PersonalDetail } from 'src/app/models/personalDetail';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AggrementComponent } from './aggrement/aggrement.component';
 import { MatStepper } from '@angular/material/stepper';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -24,10 +21,8 @@ export class CreditCheckComponent implements OnInit {
   ok: boolean = false;
 
   constructor(private stepService: StepService,
-    private router: Router,
     private toastr: ToastrService,
-    private stepper: MatStepper,
-    private spinner: NgxSpinnerService) { }
+    private stepper: MatStepper) { }
 
   ngOnInit() {
     this.populateDropDown();
@@ -63,10 +58,8 @@ export class CreditCheckComponent implements OnInit {
   }
 
   onContinue() {
-    this.spinner.show();
     this.stepService.postCreditCheck().subscribe(
-      (res) => {
-        this.spinner.hide();
+      () => {
         this.toastr.success('', 'Step-1 Completed!');
         this.stepper.selected.completed = true;
         localStorage.setItem('step1', 'completed');

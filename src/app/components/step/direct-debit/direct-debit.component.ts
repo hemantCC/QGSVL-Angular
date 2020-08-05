@@ -12,9 +12,8 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class DirectDebitComponent implements OnInit {
 
-  // debit: DirectDebit = new DirectDebit('');
   ibanNumber: string = null;
-  // iban: DirectDebit = new DirectDebit('');  //stores iban and quoteId, temporary
+  formSaved: boolean = false;
 
   constructor(private stepService: StepService,
     private toastr: ToastrService,
@@ -23,12 +22,13 @@ export class DirectDebitComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('iban') != null) {
       this.ibanNumber = localStorage.getItem('iban');
-      // this.ibanNumber = this.iban;
+      this.formSaved = true;
     }
   }
 
   onSave() {
     localStorage.setItem('iban', this.ibanNumber);
+    this.formSaved = true;
     this.toastr.success('', 'Saved Sucessfully');
   }
 

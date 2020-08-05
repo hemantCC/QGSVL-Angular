@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ViewQuotationComponent } from './view-quotation/view-quotation.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ViewQuotationComponent } from './view-quotation/view-quotation.componen
     FormsModule,
     BsDatepickerModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ]
 })
 export class VehicleDetailModule { }  

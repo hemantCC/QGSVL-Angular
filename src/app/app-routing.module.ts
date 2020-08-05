@@ -9,7 +9,7 @@ import { UserQuotesComponent } from './components/user-quotes/user-quotes.compon
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/account/login', pathMatch: 'full'
+    redirectTo: '/Home', pathMatch: 'full'
   },
   {
     path: 'Home',
@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/vehicle-detail/vehicle-detail.module').then(m => m.VehicleDetailModule)
   },
   {
-    path: 'user-quotes',
+    path: 'user-quotes', canActivate: [AuthGuard], data: { permittedRoles: ['User'] },
     component: UserQuotesComponent
   },
   {

@@ -10,3 +10,31 @@ li a:hover {
 ul li:hover {
     background-color: red;
 } */
+
+/* nav ul li a:hover {
+    background-color: red;
+    transition: .9s;
+} */
+
+
+/* li a:before {
+    content: '';
+    width: 10px;
+    height: 5px;
+    background:red;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: 0.5s;
+
+} */
+
+/* ul li a:hover a:before {
+    width: 50%;
+} */
+
+nav{
+    -webkit-box-shadow: 0px 11px 14px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 11px 14px -8px rgba(0,0,0,0.75);
+box-shadow: 0px 11px 14px -8px rgba(0,0,0,0.75);
+}

@@ -1,43 +1,28 @@
-strong {
-    width: 100%;
-}
-
-.banner {
-    position: relative;
-    text-align: center;
-}
-
-.banner-item-01 {
-    padding: 300px 0px;
+.banner-container{
+    height: 100%;
     background-image: url(/assets/images/home-banner.png) ;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 }
+.caption{
+    color: white;
+    margin-top: 10%;
+    margin-bottom: 2%;
+}
 
-.banner .text-content {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: left;
+.private-lease{
+    height: 100%;
+    background-color: darkslategray;
+    color: floralwhite;
     width: 100%;
 }
-
-@media (max-width: 768px) {
-    .banner .text-content {
-        width: 90%;
-        margin-left: 5%;
-    }
-    .banner .text-content h4 {
-        font-size: 22px;
-    }
-    .banner .text-content h2 {
-        font-size: 36px;
-        letter-spacing: 0.5px;
-    }
-    .banner-item-01,
-    .banner-item-02,
-    .banner-item-03 {
-        padding: 180px 0px;
-    }
+.private-lease-caption{
+    padding-top: 12%;
 }
+.private-lease-image{
+    width: 70%;
+}
+
+
+

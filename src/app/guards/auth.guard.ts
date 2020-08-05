@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (localStorage.getItem("token") != null) {
-
+      
       let roles = next.data['permittedRoles'] as Array<string>;   //if authenticated this checks for role
       if (roles) {
         if (this.accountService.roleMatch(roles)) {
@@ -35,7 +35,9 @@ export class AuthGuard implements CanActivate {
         return false;
       }
       return true;
-    } else this.router.navigate(["/account/login"]);                //redirect if user is not 
+    } else 
+    this.router.navigate(["/account/login"]);                //redirect if user is not 
     return false;
   }
+  
 }

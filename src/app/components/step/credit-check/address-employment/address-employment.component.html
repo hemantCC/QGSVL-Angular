@@ -6,8 +6,8 @@
       <div class="row d-flex align-items-center justify-content-between px-3">
         <h3 class="m-0">Address and Employment</h3>
         <div class="d-flex justify-content-right align-items-center">
-          <i *ngIf="formSaved" class="fa fa-check-circle text-success mr-2" style="font-size: 23px;"></i>
-          <i *ngIf="!formSaved" class="fa fa-times-circle-o text-danger mr-2" style="font-size: 23px;"></i>
+          <span *ngIf="formSaved" class="text-success mr-2" style="font-size: 15px;">Complete</span>
+          <span *ngIf="!formSaved" class="text-danger mr-2" style="font-size: 15px;">Incomplete</span>  
           <i class="fa fa-angle-down " style="font-size:30px;"></i>
         </div>
       </div>

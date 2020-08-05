@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin.service';
 import { NgForm } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,9 +15,13 @@ import { NgForm } from '@angular/forms';
 export class AdminDashboardComponent implements OnInit {
 
   statuses: any;
-  quotes: any;
-  editStatus: boolean = false;
+  editStatus: number;
   selectedStatus: string = '';
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['id', 'vehicle', 'rentDate', 'paybackTime', 'Mileage', 'totalPrice', 'status', 'Edit'];
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   constructor(private adminService: AdminService) { }
 
@@ -35,8 +42,12 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   getAllQuotes() {
-    this.adminService.getAllQuotes().subscribe((res) => {
-      this.quotes = res;
+    this.adminService.getAllQuotes().subscribe((res: any) => {
+      this.dataSource = new MatTableDataSource(res);
+      console.log(res);
+      
+      this.dataSource.sort = this.sort; 
+      this.dataSource.paginator = this.paginator
     },
       err => {
         console.log(err);
@@ -44,7 +55,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   onEdit(quoteId: number) {
-    this.editStatus = !this.editStatus;
+    this.editStatus = null;
     this.adminService.editStatus(quoteId, this.selectedStatus).subscribe((res) => {
       this.ngOnInit();
     },

@@ -134,13 +134,12 @@ export class FilterComponent implements OnInit {
         break;
       }
       case 'range': {
-        const parameter = param.value;
-        const alreadyExists = this.savedFilters.range.includes(parameter);
+        const alreadyExists = this.savedFilters.range.includes(param);
         if (!alreadyExists) {
-          this.savedFilters.range.push(parameter);
+          this.savedFilters.range.push(param);
         }
         else {
-          const index = this.savedFilters.range.indexOf(parameter);
+          const index = this.savedFilters.range.indexOf(param);
           if (index > -1) {
             this.savedFilters.range.splice(index, 1);
           }

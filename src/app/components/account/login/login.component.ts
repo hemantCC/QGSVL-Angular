@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     Password: ''
   };
   seePassword: boolean = false;
+  returnUrl: string;
 
   constructor(private accountService: AccountService,
     private router: Router,

@@ -13,54 +13,59 @@
             <form #registrationForm="ngForm" (ngSubmit)="formSubmit(registrationForm)" autocomplete="off">
                 <div class="text-center display-4">Register</div>
                 <div class="row mt-2">
-                    <div class="form-group col-md-6">
-                        <label for="fname">First Name:</label>
-                        <input id="fname" type="text" name="FirstName" #firstName="ngModel" [(ngModel)]="user.FirstName"
-                            class="form-control" required>
-                        <div class="text-danger" *ngIf="firstName.touched && !firstName.valid">First Name is Required!
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="lname">Last Name:</label>
-                        <input id="lname" type="text" name="LastName" #lastName="ngModel" [(ngModel)]="user.LastName"
-                            class="form-control" required>
-                        <div class="text-danger" *ngIf="lastName.touched && !lastName.valid">Last Name is Required!
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-2 px-1">
                         <label for="prefix">Prefix</label>
                         <select id="prefix" name="prefix" #prefix="ngModel" [(ngModel)]="user.Prefix"
                             class="form-control" required>
+                            <option value="" disabled="true">Prefix</option>
                             <option *ngFor="let item of data" [ngValue]="item.name">{{item.name}}</option>
                         </select>
                         <div class="text-danger" *ngIf="prefix.touched && !prefix.valid">Prefix is Required!</div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-5 px-1">
+                        <label for="fname">First Name:</label>
+                        <input id="fname" type="text" name="FirstName" #firstName="ngModel" [(ngModel)]="user.FirstName"
+                            class="form-control" required placeholder="first name">
+                        <div class="text-danger" *ngIf="firstName.touched && !firstName.valid">First Name is Required!
+                        </div>
+                    </div>
+                    <div class="form-group col-md-5 px-1">
+                        <label for="lname">Last Name:</label>
+                        <input id="lname" type="text" name="LastName" #lastName="ngModel" [(ngModel)]="user.LastName"
+                            class="form-control" required placeholder="last name">
+                        <div class="text-danger" *ngIf="lastName.touched && !lastName.valid">Last Name is Required!
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 px-1">
                         <label for="contact">Contact:</label>
                         <input id="contact" type="text" name="Contact" #contact="ngModel" [(ngModel)]="user.Contact"
-                            class="form-control">
+                            class="form-control" placeholder="contact">
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 px-1">
                         <label for="dob">Date of Birth:</label>
                         <input id="dob" type="text" bsDatepicker name="DateOfBirth" #dateOfBirth="ngModel"
-                            [(ngModel)]="user.DateOfBirth" class="form-control" required>
+                            [(ngModel)]="user.DateOfBirth" class="form-control" required
+                            [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-red', dateInputFormat: 'DD-MM-YYYY' }"
+                            placeholder="DD-MM-YYYY">
                         <div class="text-danger" *ngIf="dateOfBirth.touched && !dateOfBirth.valid">Provide Date of
                             Birth!</div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 px-1">
                         <label for="email">Email:</label>
                         <input id="email" type="text" name="Email" #email="ngModel" [(ngModel)]="user.Email"
-                            class="form-control" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+                            class="form-control" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                            placeholder="email">
                         <div class="text-danger" *ngIf="email.touched && email.errors?.required">Email is Required!
                         </div>
                         <div class="text-danger" *ngIf="email.touched && email.errors?.pattern">Email is Invalid!</div>
                     </div>
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6 px-1">
                         <label for="password">Password:</label>
                         <div class="input-group mb-3">
                             <input id="password" type="{{seePassword?'text':'password'}}" name="Password"
-                                #password="ngModel" [(ngModel)]="user.Password" class="form-control" required>
+                                #password="ngModel" [(ngModel)]="user.Password" class="form-control" required
+                                placeholder="password">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="{{seePassword?'fa fa-eye':'fa fa-eye-slash'}}"
@@ -71,7 +76,7 @@
                         <div class="text-danger" *ngIf="password.touched && !password.valid">Password is Required!</div>
                     </div>
 
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12 px-1">
                         <button type="submit" class="btn btn-primary  float-center btn-block"
                             [disabled]="registrationForm.invalid">Register</button>
                     </div>

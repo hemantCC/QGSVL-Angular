@@ -16,25 +16,26 @@ export class AddressEmploymentComponent implements OnInit {
   file: File = null;
   stringFile: string = null;
   formSaved: boolean = false;
+  // formSubmitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService) {
 
     this.addressEmploymentForm = formBuilder.group({
-      employmentStatus: ['',Validators.required],
-      employerName: ['',[Validators.required,Validators.pattern('^[a-zA-Z ]*$'),Validators.maxLength(40)]],
-      contractType: ['',Validators.required],
-      startDate: ['',Validators.required],
-      addressLine1: ['',Validators.required],
+      employmentStatus: ['', Validators.required],
+      employerName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$'), Validators.maxLength(40)]],
+      contractType: ['', Validators.required],
+      startDate: ['', Validators.required],
+      addressLine1: ['', Validators.required],
       addressLine2: new FormControl(''),
-      postCode: ['',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(5),Validators.maxLength(7)]],
-      city: ['',Validators.required],
-      netIncome: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
-      rentalIncome: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
+      postCode: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(7)]],
+      city: ['', Validators.required],
+      netIncome: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      rentalIncome: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       salarySlip: new FormControl(''),
-      propertyStatus: ['',Validators.required],
-      creditCost: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
-      monthlyRent: ['',[Validators.required,Validators.pattern("^[0-9]*$")]],
+      propertyStatus: ['', Validators.required],
+      creditCost: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      monthlyRent: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
     });
   }
 
@@ -65,7 +66,7 @@ export class AddressEmploymentComponent implements OnInit {
   onSave() {
     localStorage.setItem('address-Employment', JSON.stringify(this.addressEmploymentForm.value));
     this.formSaved = true;
-    this.toastr.success('','Saved Successfully');
+    this.toastr.success('', 'Saved Successfully');
     console.log(JSON.parse(localStorage.getItem('address-Employment')));
   }
 
@@ -89,8 +90,9 @@ export class AddressEmploymentComponent implements OnInit {
         creditCost: populate?.creditCost,
       });
       this.formSaved = true;
+      // if (localStorage.getItem('step1') != null) { this.formSubmitted = true}
     }
-    
+
   }
 
 }

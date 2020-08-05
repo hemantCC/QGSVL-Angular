@@ -10,20 +10,16 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getAllQuoteStatus() {
-    return this.http.get(getAllQuoteStatusUrl, { headers: this.getTokenHeader() });
+    return this.http.get(getAllQuoteStatusUrl);
   }
 
   getAllQuotes() {
-    return this.http.get(getAllQuotesUrl, { headers: this.getTokenHeader() });
-  }
-
-  getTokenHeader(): HttpHeaders {
-    return new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') });
+    return this.http.get(getAllQuotesUrl);
   }
 
   editStatus(id: number, status: string) {
     let data = { QuoteId: id, Status: status };
-    return this.http.post(editQuoteStatusUrl, data, { headers: this.getTokenHeader() });
+    return this.http.post(editQuoteStatusUrl, data);
   }
 
 }

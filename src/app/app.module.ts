@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 
@@ -12,6 +12,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from './components/shared/shared.module';
 import { ViewQuotationComponent } from './components/vehicle-detail/view-quotation/view-quotation.component';
 import { UserQuotesComponent } from './components/user-quotes/user-quotes.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { UserQuotesComponent } from './components/user-quotes/user-quotes.compon
     SharedModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents:[ViewQuotationComponent]
 })
