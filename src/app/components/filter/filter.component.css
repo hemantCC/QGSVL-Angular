@@ -20,8 +20,11 @@ mat-sidenav{
         card css
 ******************************/
 
-.card:hover {
-    box-shadow: -1px 9px 50px -12px black;
+.card {
+    -webkit-box-shadow: 0px 10px 29px -19px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 10px 29px -19px rgba(0,0,0,0.75);
+box-shadow: 0px 10px 29px -19px rgba(0,0,0,0.75);
+
 }
 
 .product-price {

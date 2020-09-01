@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {
   directDebitUrl,
   creditCheckValuesUrl,
   creditCheckUrl,
-  getCurrentQuoteUrl,
   submitDocumentsUrl
 } from '../config/apiUrl';
 import { DirectDebit } from '../models/directDebit';
@@ -49,15 +48,13 @@ export class StepService {
     return this.http.post(creditCheckUrl, this.data);
   }
 
-  getCurrentQuote() {
-    return this.http.get(getCurrentQuoteUrl);
-  }
-
   postDocuments(drivingLicense: File, certificateOfResidence: File, identificationProof: File) {
+    var quoteId = JSON.parse(localStorage.getItem('currentQuote')).id;
     const formData: FormData = new FormData();
     formData.append('drivingLicense', drivingLicense, drivingLicense.name);
     formData.append('certificateOfResidence', certificateOfResidence, certificateOfResidence.name);
     formData.append('identificationProof', identificationProof, identificationProof.name);
+    formData.append('quoteId', quoteId);
     return this.http.post(submitDocumentsUrl, formData);
   }
 

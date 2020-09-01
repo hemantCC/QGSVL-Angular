@@ -83,8 +83,8 @@
                         <div class="row">
                             <div class="col-md-12 mt-2"><b>Are you the main driver?</b></div>
                             <div class="col-md-12 my-2">
-                                <input type="radio" value="true" formControlName="isMainDriver"> Yes
-                                <input type="radio" value="false" formControlName="isMainDriver"> No
+                                <input type="radio" value="true" formControlName="isMainDriver" (change)="onChangeDriver()"> Yes
+                                <input type="radio" value="false" formControlName="isMainDriver" (change)="onChangeDriver()"> No
                             </div>
                             <!-- if User is NOT Driver -->
                             <div class="form-group col-md-2"

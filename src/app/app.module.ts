@@ -13,11 +13,13 @@ import { SharedModule } from './components/shared/shared.module';
 import { ViewQuotationComponent } from './components/vehicle-detail/view-quotation/view-quotation.component';
 import { UserQuotesComponent } from './components/user-quotes/user-quotes.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { FAQComponent } from './components/shared/faq/faq.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserQuotesComponent,
+    FAQComponent
   ],
   imports: [
     BrowserModule,

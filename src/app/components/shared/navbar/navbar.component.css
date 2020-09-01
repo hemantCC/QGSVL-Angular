@@ -33,8 +33,15 @@ ul li:hover {
     width: 50%;
 } */
 
-nav{
+nav , .collapse{
     -webkit-box-shadow: 0px 11px 14px -8px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 11px 14px -8px rgba(0,0,0,0.75);
 box-shadow: 0px 11px 14px -8px rgba(0,0,0,0.75);
+}
+
+.bg-dark{
+    background-color: black!important;
+}
+a.nav-link{
+    color: #fff!important;
 }

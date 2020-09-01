@@ -137,6 +137,8 @@ export class VehicleDetailComponent implements OnInit {
             selectedVehicle: localStorage.getItem('selectedVehicle')
           }
           this.quoteService.generateQuote(data).subscribe((res) => {
+            console.log(res);
+            localStorage.setItem('currentQuote',JSON.stringify(res));
             this.toastr.success('After approval you may proceed!', 'Order Request sent');
             localStorage.setItem('vehicleDetailsForm', JSON.stringify(data));
             this.formSubmitted = true
@@ -150,6 +152,7 @@ export class VehicleDetailComponent implements OnInit {
         }
         else {
           this.toastr.warning('You need to be logged in to continue process.', 'Please Login!');
+          this.router.navigateByUrl('/account/login');
         }
       }
     })
@@ -157,6 +160,16 @@ export class VehicleDetailComponent implements OnInit {
 
   userLoggedin(): Boolean {
     return (localStorage.getItem('token') != null) ? true : false;
+  }
+
+  onChangeDriver(){
+    this.vehicleDetailForm.patchValue({
+      prefix : '',
+      firstName : '',
+      lastName: '',
+      dateOfBirth:''
+    });
+    this.vehicleDetailForm.markAsUntouched();
   }
 
 

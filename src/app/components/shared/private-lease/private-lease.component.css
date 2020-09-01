@@ -1,0 +1,13 @@
+
+.private-lease{
+    height: 100%;
+    /* background-color: darkslategray;
+    color: floralwhite; */
+    width: 100%;
+}
+.private-lease-caption{
+    padding-top: 2%;
+}
+.private-lease-image{
+    width: 70%;
+}

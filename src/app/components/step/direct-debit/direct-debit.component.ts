@@ -20,6 +20,10 @@ export class DirectDebitComponent implements OnInit {
     private stepper: MatStepper) { }
 
   ngOnInit() {
+    this.onReload();
+  }
+
+  onReload(){
     if (localStorage.getItem('iban') != null) {
       this.ibanNumber = localStorage.getItem('iban');
       this.formSaved = true;

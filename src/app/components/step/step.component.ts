@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-step',
@@ -13,10 +14,18 @@ export class StepComponent implements OnInit {
   step4Completed: boolean = false;
   step5Completed: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.checkStepCompleted();
+    this.quoteExists();
+  }
+
+  quoteExists() {
+    if (localStorage.getItem('currentQuote') == null) {
+      this.router.navigateByUrl('/forbidden');
+      alert('Please generate quote to proceed!');
+    }
   }
 
   checkStepCompleted() {
@@ -25,10 +34,10 @@ export class StepComponent implements OnInit {
     }
     if (localStorage.getItem('step2') != null) {
       this.step2Completed = true;
-    } 
+    }
     if (localStorage.getItem('step3') != null) {
       this.step3Completed = true;
-    } 
+    }
     if (localStorage.getItem('step4') != null) {
       this.step4Completed = true;
     }

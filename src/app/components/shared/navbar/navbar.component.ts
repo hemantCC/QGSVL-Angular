@@ -33,7 +33,9 @@ export class NavbarComponent implements OnInit {
   logoutUser() {
     localStorage.removeItem('token');
     this.toastr.success('You have successfully logged out!', 'Logout Sucessfull');
-    window.location.reload();
+    if (JSON.parse(localStorage.getItem('selectedFilters')) != null){
+      localStorage.removeItem('selectedFilters');
+    }
     this.router.navigateByUrl('/Home');
   }
 

@@ -62,7 +62,7 @@
 
     <mat-sidenav-content>
         <div class="row d-flex justify-content-between px-3 mt-4">
-            <button class="btn btn-secondary position-fixed" (click)="opened = !opened"><i
+            <button class="btn btn-secondary position-fixed" (click)="opened = !opened" [hidden]="opened"><i
                     class="fa fa-filter"></i></button>
             <mat-chip-list class="chips" aria-label="Filter selection">
                 <span *ngIf="savedFilters.brands != null">
@@ -98,20 +98,20 @@
         <div class="row px-5 mt-3">
             <div class="col-sm-12 col-md-4 col-lg-3 car-item" *ngFor="let vehicle of filteredVehicles">
                 <div class="card mb-4" (click)="onVehicleSelection(vehicle.id)">
-                    <img src="/assets/images/vehicles/{{ vehicle.image }}" class="card-img-top" style="height:224px" />
                     <div class="card-body serif">
-                        <h4 class="text-center" style="height:50px">{{ vehicle.modelName }}</h4><br>
-                        <strong>Vehicle Type: </strong> {{ vehicle.type }}<br>
-                        <strong>Fuel Type: </strong> {{ vehicle.fuelType }}<br>
-                        <strong>Gear Box: </strong>{{ vehicle.transmission }}<br>
-                        <strong>CO2: </strong>{{ vehicle.cO2Emission }}<br>
-                        <strong>Consumption: </strong>{{ vehicle.fuelConsumption }}<br>
                         <div style="display:flex;justify-content:flex-end;width:100%;">
                             <span class="product-price" style="flex-wrap:wrap;display:flex;margin-right:-31px;">
                                 <b>&euro;{{vehicle.price}}</b>
                             </span>
                         </div>
+                        <div class="text-center" style="height:10px"><b> {{ vehicle.modelName }} </b></div><br>
+                        <strong>Vehicle Type: </strong> {{ vehicle.type }}<br>
+                        <strong>Fuel Type: </strong> {{ vehicle.fuelType }}<br>
+                        <strong>Gear Box: </strong>{{ vehicle.transmission }}<br>
+                        <strong>CO2: </strong>{{ vehicle.cO2Emission }}<br>
+                        <strong>Consumption: </strong>{{ vehicle.fuelConsumption }}<br>
                     </div>
+                    <img src="/assets/images/vehicles/{{ vehicle.image }}" class="card-img-bottom" style="height:224px" />
                 </div>
             </div>
         </div>

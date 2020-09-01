@@ -29,15 +29,15 @@
               <div class="col-md-5">
                 <div class="text-center"> <strong> Quote Details </strong></div>
                 <div class="row px-5 mt-2">
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Brand : </strong> {{ quoteDetails.brand }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Model : </strong> {{ quoteDetails.model }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Type : </strong> {{ quoteDetails.type }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>CO<sub>2</sub> Emission : </strong> {{ quoteDetails.co2Emission }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Fuel Consumption : </strong> {{ quoteDetails.fuelConsumption }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Fuel Type : </strong> {{ quoteDetails.fuelType }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Transmission : </strong> {{ quoteDetails.transmission }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Payback Time : </strong> {{ quoteDetails.paybackTime }}</div>
-                  <div class="form-group col-md-12 m-0 p-2"><strong>Total Price : </strong> {{ quoteDetails.totalPrice }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Brand : </strong> {{ quoteDetails.car.brand }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Model : </strong> {{ quoteDetails.car.modelName }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Type : </strong> {{ quoteDetails.car.type }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>CO<sub>2</sub> Emission : </strong> {{ quoteDetails.car.cO2Emission }}  g/kms</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Fuel Consumption : </strong> {{ quoteDetails.car.fuelConsumption }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Fuel Type : </strong> {{ quoteDetails.car.fuelType }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Transmission : </strong> {{ quoteDetails.car.transmission }}</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Payback Time : </strong> {{ quoteDetails.paybackTime.paybackInMonths }} Months</div>
+                  <div class="form-group col-md-12 m-0 p-2"><strong>Total Price : </strong>&euro; {{ quoteDetails.totalPrice }}</div>
                 </div>
               </div>
             </div>

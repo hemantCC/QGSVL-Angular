@@ -45,6 +45,9 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/administrator/dashboard');
         }
         else {
+          if (JSON.parse(localStorage.getItem('selectedFilters')) != null){
+            localStorage.removeItem('selectedFilters');
+          }
           this.router.navigateByUrl('/Home');
         }
       },

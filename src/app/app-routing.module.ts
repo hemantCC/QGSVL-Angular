@@ -4,6 +4,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
 import { UserQuotesComponent } from './components/user-quotes/user-quotes.component';
+import { FAQComponent } from './components/shared/faq/faq.component';
+import { PrivateLeaseComponent } from './components/shared/private-lease/private-lease.component';
 
 
 const routes: Routes = [
@@ -42,6 +44,14 @@ const routes: Routes = [
   {
     path: 'forbidden',
     component: ForbiddenComponent
+  },
+  {
+    path: 'FAQ',
+    component: FAQComponent
+  },
+  {
+    path: 'private-lease',
+    component: PrivateLeaseComponent
   },
   {
     path: '**',

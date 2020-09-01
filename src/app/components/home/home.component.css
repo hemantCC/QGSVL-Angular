@@ -4,12 +4,13 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    padding-top: 10%;
 }
-.caption{
+/* .caption{
     color: white;
     margin-top: 10%;
     margin-bottom: 2%;
-}
+} */
 
 .private-lease{
     height: 100%;
@@ -22,6 +23,12 @@
 }
 .private-lease-image{
     width: 70%;
+}
+
+.canvas{
+    background:rgba(255, 255, 255, .4) ;
+    border-radius: 25px;
+    padding-top: 1%;
 }
 
 

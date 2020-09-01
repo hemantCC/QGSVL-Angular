@@ -10,7 +10,7 @@ import { Filters } from 'src/app/models/filters';
 })
 export class FilterComponent implements OnInit {
 
-  opened: boolean = false;
+  opened: boolean = true;
   vehicles: any[]
   filteredVehicles: any[]
   dropDownValues: any[] = [];

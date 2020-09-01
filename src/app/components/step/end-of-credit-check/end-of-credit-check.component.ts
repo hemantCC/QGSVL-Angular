@@ -14,18 +14,16 @@ export class EndOfCreditCheckComponent implements OnInit {
     private stepper: MatStepper) { }
 
   ngOnInit() {
-    this.stepService.getCurrentQuote().subscribe(
-      (res) =>{
-        this.quoteDetails = res;
-        console.log(this.quoteDetails);
-      },
-      (err)=>{
-        console.log(err);
-      }
-    );
+    this.initialize();
   }
 
-  onContinue(){
+  initialize() {
+    this.quoteDetails = JSON.parse(localStorage.getItem('currentQuote'));
+    console.log(this.quoteDetails);
+
+  }
+
+  onContinue() {
     this.stepper.selected.completed = true;
     localStorage.setItem('step2', 'completed');
     this.stepper.next();
