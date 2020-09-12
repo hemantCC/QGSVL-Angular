@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [HomeComponent,
@@ -13,7 +14,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TranslateModule
   ]
 })
 export class HomeModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Router } from '@angular/router';
 import { Filters } from 'src/app/models/filters';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-filter',
@@ -22,6 +23,7 @@ export class FilterComponent implements OnInit {
     { id: 2, value: '250-499' },
     { id: 3, value: '500-749' },
     { id: 4, value: '750-above' }]
+    vehicleSubscription: Subscription
 
   constructor(private vehicleService: VehicleService,
     private router: Router) { }
@@ -32,7 +34,7 @@ export class FilterComponent implements OnInit {
 
   //initializes by getting all vehicle and filter data
   getData() {
-    this.vehicleService.getVehicles().subscribe((res: any) => {
+    this.vehicleSubscription = this.vehicleService.getVehicles().subscribe((res: any) => {
       this.vehicles = this.filteredVehicles = res;
       this.populateFilters(); //populate filters from vehicle details
       this.initializeSelectedFilters();
@@ -189,6 +191,12 @@ export class FilterComponent implements OnInit {
     localStorage.removeItem('selectedFilters');
     this.savedFilters = new Filters([],[],[],[],[]);
     this.filteredVehicles = this.vehicles;
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.vehicleSubscription.unsubscribe();
   }
 
 }

@@ -6,6 +6,7 @@ import { ForbiddenComponent } from './components/shared/forbidden/forbidden.comp
 import { UserQuotesComponent } from './components/user-quotes/user-quotes.component';
 import { FAQComponent } from './components/shared/faq/faq.component';
 import { PrivateLeaseComponent } from './components/shared/private-lease/private-lease.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 const routes: Routes = [
@@ -60,7 +61,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    TranslateModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

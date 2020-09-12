@@ -61,7 +61,9 @@ export class AdminDashboardComponent implements OnInit {
     },
       err => {
         console.log(err);
+        this.ngOnInit();
       });
+      
   }
 
 }

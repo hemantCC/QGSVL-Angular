@@ -1,120 +1,209 @@
 <!-- Spinner -->
-<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
-    <p style="color: white"> Loading... </p>
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.78)"
+  size="medium"
+  color="#fa0000"
+  type="triangle-skew-spin"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
 </ngx-spinner>
 
 <app-navbar></app-navbar>
 
 <mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="push">
+    <h2 class="text-center m-0">
+      {{ "Filter.drawerTitle" | translate }}
+      <span class="float-right"
+        ><i
+          class="fa fa-caret-left"
+          style="font-size: 50px"
+          (click)="opened = false"
+        ></i
+      ></span>
+    </h2>
 
-    <mat-sidenav [(opened)]="opened" mode="push">
-        <h2 class="text-center m-0"> Select Filters
-            <span class="float-right"><i class="fa fa-caret-left" style="font-size:50px;"
-                    (click)="opened = false"></i></span>
-        </h2>
+    <hr />
 
-        <hr>
+    <div class="row">
+      <strong class="ml-5 mb-2" style="font-size: 16px">{{
+        "Home.VehicleType" | translate
+      }}</strong>
+      <div class="ml-3 col-md-12" *ngFor="let item of filters.types">
+        <input
+          class="mr-2"
+          [value]="item"
+          type="checkbox"
+          (change)="onFilter('type', item)"
+          [checked]="savedFilters.types.includes(item)"
+        />
+        {{ item }}
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <strong class="ml-5 mb-2" style="font-size: 16px">{{
+        "Home.Brand" | translate
+      }}</strong>
+      <div class="ml-3 col-md-12" *ngFor="let item of filters.brands">
+        <input
+          class="mr-2"
+          [value]="item"
+          type="checkbox"
+          (change)="onFilter('brand', item)"
+          [checked]="savedFilters.brands.includes(item)"
+        />
+        {{ item }}
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <strong class="ml-5 mb-2" style="font-size: 16px">{{
+        "Home.FuelType" | translate
+      }}</strong>
+      <div class="ml-3 col-md-12" *ngFor="let item of filters.fuelTypes">
+        <input
+          class="mr-2"
+          [value]="item"
+          type="checkbox"
+          (change)="onFilter('fuelType', item)"
+          [checked]="savedFilters.fuelTypes.includes(item)"
+        />
+        {{ item }}
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <strong class="ml-5 mb-2" style="font-size: 16px">{{
+        "Home.Transmission" | translate
+      }}</strong>
+      <div class="ml-3 col-md-12" *ngFor="let item of filters.transmission">
+        <input
+          class="mr-2"
+          [value]="item"
+          type="checkbox"
+          (change)="onFilter('transmission', item)"
+          [checked]="savedFilters.transmission.includes(item)"
+        />
+        {{ item }}
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <strong class="ml-5 mb-2" style="font-size: 16px">{{
+        "Home.PriceRange" | translate
+      }}</strong>
+      <div class="ml-3 col-md-12" *ngFor="let item of range">
+        <input
+          class="mr-2"
+          [value]="item.value"
+          type="checkbox"
+          (change)="onFilter('range', item.value)"
+          [checked]="savedFilters.range.includes(item.value)"
+        />
+        {{ item.value }}
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <div class="btn btn-danger" (click)="onResetFilters()">
+        <i class="fa fa-trash mr-2"></i>Reset Filters
+      </div>
+    </div>
+  </mat-sidenav>
 
-        <div class="row">
-            <strong class="ml-5 mb-2" style="font-size: 16px;">Vehicle Type</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of filters.types">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('type',item)"
-                    [checked]="savedFilters.types.includes(item)"> {{ item }}
+  <mat-sidenav-content>
+    <div class="row d-flex justify-content-between px-3 mt-4">
+      <button
+        class="btn btn-secondary position-fixed"
+        (click)="opened = !opened"
+        [hidden]="opened"
+      >
+        <i class="fa fa-filter"></i>
+      </button>
+      <mat-chip-list class="chips" aria-label="Filter selection">
+        <span *ngIf="savedFilters.brands != null">
+          <mat-chip
+            *ngFor="let item of savedFilters.brands"
+            (removed)="onFilter('brand', item)"
+            >{{ item }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </span>
+        <span *ngIf="savedFilters.fuelTypes != null">
+          <mat-chip
+            *ngFor="let item of savedFilters.fuelTypes"
+            (removed)="onFilter('fuelType', item)"
+          >
+            {{ item }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </span>
+        <span *ngIf="savedFilters.range != null">
+          <mat-chip
+            *ngFor="let item of savedFilters.range"
+            (removed)="onFilter('range', item)"
+            >{{ item }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </span>
+        <span *ngIf="savedFilters.transmission != null">
+          <mat-chip
+            *ngFor="let item of savedFilters.transmission"
+            (removed)="onFilter('transmission', item)"
+          >
+            {{ item }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </span>
+        <span *ngIf="savedFilters.types != null">
+          <mat-chip
+            *ngFor="let item of savedFilters.types"
+            (removed)="onFilter('type', item)"
+            >{{ item }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </span>
+      </mat-chip-list>
+    </div>
+    <div
+      class="text-center display-4 mt-5"
+      *ngIf="filteredVehicles?.length == 0"
+    >
+      No Vehicle Match Found
+    </div>
+    <div class="row px-5 mt-3">
+      <div
+        class="col-sm-12 col-md-4 col-lg-3 car-item"
+        *ngFor="let vehicle of filteredVehicles"
+      >
+        <div class="card mb-4" (click)="onVehicleSelection(vehicle.id)">
+          <div class="card-body serif">
+            <div style="display: flex; justify-content: flex-end; width: 100%">
+              <span
+                class="product-price"
+                style="flex-wrap: wrap; display: flex; margin-right: -31px"
+              >
+                <b>&euro;{{ vehicle.price }}</b>
+              </span>
             </div>
-        </div>
-        <hr>
-        <div class="row">
-            <strong class="ml-5 mb-2" style="font-size: 16px;">Brands</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of filters.brands">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('brand',item)"
-                    [checked]="savedFilters.brands.includes(item)"> {{ item }}
+            <div class="text-center" style="height: 10px">
+              <b> {{ vehicle.modelName }} </b>
             </div>
+            <br />
+            <strong>Vehicle Type: </strong> {{ vehicle.type }}<br />
+            <strong>Fuel Type: </strong> {{ vehicle.fuelType }}<br />
+            <strong>Gear Box: </strong>{{ vehicle.transmission }}<br />
+            <strong>CO2: </strong>{{ vehicle.cO2Emission }}<br />
+            <strong>Consumption: </strong>{{ vehicle.fuelConsumption }}<br />
+          </div>
+          <img
+            src="/assets/images/vehicles/{{ vehicle.image }}"
+            class="card-img-bottom"
+            style="height: 224px"
+          />
         </div>
-        <hr>
-        <div class="row">
-            <strong class="ml-5 mb-2" style="font-size: 16px;">Fuel Type</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of filters.fuelTypes">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('fuelType',item)"
-                    [checked]="savedFilters.fuelTypes.includes(item)"> {{ item }}
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <strong class="ml-5 mb-2" style="font-size: 16px;">Transmission</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of filters.transmission">
-                <input class="mr-2" [value]="item" type="checkbox" (change)="onFilter('transmission',item)"
-                    [checked]="savedFilters.transmission.includes(item)"> {{ item }}
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <strong class="ml-5 mb-2" style="font-size: 16px;">Price Range</strong>
-            <div class="ml-3 col-md-12" *ngFor="let item of range">
-                <input class="mr-2" [value]="item.value" type="checkbox" (change)="onFilter('range',item.value)"
-                    [checked]="savedFilters.range.includes(item.value)"> {{ item.value }}
-            </div>
-        </div>
-        <div class="text-center mt-3">
-            <div class="btn btn-danger" (click)="onResetFilters()"><i class="fa fa-trash mr-2"></i>Reset Filters</div>
-        </div>
-
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <div class="row d-flex justify-content-between px-3 mt-4">
-            <button class="btn btn-secondary position-fixed" (click)="opened = !opened" [hidden]="opened"><i
-                    class="fa fa-filter"></i></button>
-            <mat-chip-list class="chips" aria-label="Filter selection">
-                <span *ngIf="savedFilters.brands != null">
-                    <mat-chip *ngFor="let item of savedFilters.brands" (removed)="onFilter('brand',item)">{{ item }}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                </span>
-                <span *ngIf="savedFilters.fuelTypes != null">
-                    <mat-chip *ngFor="let item of savedFilters.fuelTypes" (removed)="onFilter('fuelType',item)">
-                        {{ item }}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                </span>
-                <span *ngIf="savedFilters.range != null">
-                    <mat-chip *ngFor="let item of savedFilters.range" (removed)="onFilter('range',item)">{{ item }}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                </span>
-                <span *ngIf="savedFilters.transmission != null">
-                    <mat-chip *ngFor="let item of savedFilters.transmission" (removed)="onFilter('transmission',item)">
-                        {{ item }}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                </span>
-                <span *ngIf="savedFilters.types != null">
-                    <mat-chip *ngFor="let item of savedFilters.types" (removed)="onFilter('type',item)">{{ item }}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                </span>
-            </mat-chip-list>
-        </div>
-        <div class="text-center display-4 mt-5" *ngIf="filteredVehicles?.length == 0">No Vehicle Match Found</div>
-        <div class="row px-5 mt-3">
-            <div class="col-sm-12 col-md-4 col-lg-3 car-item" *ngFor="let vehicle of filteredVehicles">
-                <div class="card mb-4" (click)="onVehicleSelection(vehicle.id)">
-                    <div class="card-body serif">
-                        <div style="display:flex;justify-content:flex-end;width:100%;">
-                            <span class="product-price" style="flex-wrap:wrap;display:flex;margin-right:-31px;">
-                                <b>&euro;{{vehicle.price}}</b>
-                            </span>
-                        </div>
-                        <div class="text-center" style="height:10px"><b> {{ vehicle.modelName }} </b></div><br>
-                        <strong>Vehicle Type: </strong> {{ vehicle.type }}<br>
-                        <strong>Fuel Type: </strong> {{ vehicle.fuelType }}<br>
-                        <strong>Gear Box: </strong>{{ vehicle.transmission }}<br>
-                        <strong>CO2: </strong>{{ vehicle.cO2Emission }}<br>
-                        <strong>Consumption: </strong>{{ vehicle.fuelConsumption }}<br>
-                    </div>
-                    <img src="/assets/images/vehicles/{{ vehicle.image }}" class="card-img-bottom" style="height:224px" />
-                </div>
-            </div>
-        </div>
-    </mat-sidenav-content>
-
+      </div>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

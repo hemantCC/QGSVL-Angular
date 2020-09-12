@@ -6,6 +6,7 @@ import { ViewQuotationComponent } from './view-quotation/view-quotation.componen
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuoteService } from 'src/app/services/quote.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -27,6 +28,7 @@ export class VehicleDetailComponent implements OnInit {
     { id: 2, name: 'Ms.' },
     { id: 3, name: 'Dr.' }
   ];
+  vehicleSubscription: Subscription;
   vehicleDetailForm: FormGroup;
   formSubmitted: boolean = false;
 
@@ -95,7 +97,7 @@ export class VehicleDetailComponent implements OnInit {
       this.router.navigateByUrl('/filter');
     }
     else {
-      this.vehicleService.getVehicleById(id).subscribe((res: any) => {
+      this.vehicleSubscription = this.vehicleService.getVehicleById(id).subscribe((res: any) => {
         console.log(res);
         this.vehicle = res.vehicle;
         this.totalPrice = this.vehicle?.price + (this.paybackTime / 12) * 1000 + (this.mileage / 5000) * 200;
@@ -172,5 +174,10 @@ export class VehicleDetailComponent implements OnInit {
     this.vehicleDetailForm.markAsUntouched();
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.vehicleSubscription.unsubscribe();
+  }
 
 }

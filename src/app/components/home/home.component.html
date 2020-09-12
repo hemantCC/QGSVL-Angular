@@ -3,129 +3,212 @@
 
 <!-- banner -->
 <div class="container-fluid banner-container">
-    <div class="canvas">
-        <div class="row justify-content-center">
-            <div class="display-4 caption text-center">Search Vehicle</div>
-        </div>
-        <div class="row d-flex justify-content-center px-4">
-            <div class="col-sm-8 col-md-6 col-lg-2  py-1 ">
-                <button type="button" href="#pageSubmenu2" id="sendbtn" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle form-control">
-                    Vehicle Type
-                </button>
-                <ul class="collapse list-unstyled" id="pageSubmenu2" style="color:aliceblue;background-color: black;">
-                    <li>
-                        <div id="typeList" class="d-flex flex-column">
-                            <span class="ml-3" *ngFor="let item of filters.types">
-                                <input class="mr-2" [value]="item" type="checkbox"
-                                    (change)="onFilterChange('type',item)"
-                                    [checked]="savedFilters.types.includes(item)">
-                                <strong>{{item}}</strong>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-8 col-md-6 col-lg-2 py-1">
-                <button type="button" href="#homeSubmenu" id="Brand" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle form-control">Brand</button>
-                <ul class="collapse list-unstyled " id="homeSubmenu" style="color:aliceblue;background-color: black;">
-                    <li>
-                        <div id="brandList" class="d-flex flex-column">
-                            <span class="ml-3" *ngFor="let item of filters.brands">
-                                <input class="mr-2" [value]="item" type="checkbox"
-                                    (change)="onFilterChange('brand',item)"
-                                    [checked]="savedFilters.brands.includes(item)">
-                                <strong>{{item}}</strong>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-sm-8 col-md-6 col-lg-2 py-1">
-                <button type="button" href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle form-control">
-                    FuelType
-                </button>
-                <ul class="collapse list-unstyled" id="pageSubmenu" style="color:aliceblue;background-color: black;">
-                    <li>
-                        <div id="fuelList" class="d-flex flex-column">
-                            <span class="ml-3" *ngFor="let item of filters.fuelTypes">
-                                <input class="mr-2" [value]="item" type="checkbox"
-                                    (change)="onFilterChange('fuelType',item)"
-                                    [checked]="savedFilters.fuelTypes.includes(item)">
-                                <strong>{{item}}</strong>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-sm-8 col-md-6 col-lg-2 py-1">
-                <button type="button" href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle form-control">
-                    Transmission
-                </button>
-                <ul class="collapse list-unstyled" id="pageSubmenu1" style="color:aliceblue;background-color: black;">
-                    <li>
-                        <div id="transmissionList" class="d-flex flex-column">
-                            <span class="ml-3" *ngFor="let item of filters.transmission">
-                                <input class="mr-2" [value]="item" type="checkbox"
-                                    (change)="onFilterChange('transmission',item)"
-                                    [checked]="savedFilters.transmission.includes(item)">
-                                <strong>{{item}}</strong>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-sm-8 col-md-6 col-lg-2  py-1">
-                <button type="button" href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle form-control">
-                    Price Range
-                </button>
-                <ul class="collapse list-unstyled" id="pageSubmenu3" style="color:aliceblue;background-color: black;">
-                    <li>
-                        <div id="rangeList" class="d-flex flex-column">
-                            <span class="ml-3" *ngFor="let item of range">
-                                <input class="mr-2" [value]="item.id" type="checkbox"
-                                    (change)="onFilterChange('range',item)"
-                                    [checked]="savedFilters.range.includes(item.value)">
-                                <strong>{{item.value}}</strong>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-2">
-            <a (click)="onSearch()" class="btn btn-primary mb-2" type="submit">Search</a>
-        </div>
+  <div class="canvas">
+    <div class="row justify-content-center">
+      <div class="display-4 caption text-center">
+        {{ "Home.bannerTitle" | translate }}
+      </div>
     </div>
+    <div class="row d-flex justify-content-center px-4">
+      <div class="col-sm-8 col-md-6 col-lg-2 py-1">
+        <button
+          type="button"
+          href="#pageSubmenu2"
+          id="sendbtn"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle form-control"
+        >
+          {{ "Home.VehicleType" | translate }}
+        </button>
+        <ul
+          class="collapse list-unstyled"
+          id="pageSubmenu2"
+          style="color: aliceblue; background-color: black"
+        >
+          <li>
+            <div id="typeList" class="d-flex flex-column">
+              <span class="ml-3" *ngFor="let item of filters.types">
+                <input
+                  class="mr-2"
+                  [value]="item"
+                  type="checkbox"
+                  (change)="onFilterChange('type', item)"
+                  [checked]="savedFilters.types.includes(item)"
+                />
+                <strong>{{ item }}</strong>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-8 col-md-6 col-lg-2 py-1">
+        <button
+          type="button"
+          href="#homeSubmenu"
+          id="Brand"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle form-control"
+        >
+          {{ "Home.Brand" | translate }}
+        </button>
+        <ul
+          class="collapse list-unstyled"
+          id="homeSubmenu"
+          style="color: aliceblue; background-color: black"
+        >
+          <li>
+            <div id="brandList" class="d-flex flex-column">
+              <span class="ml-3" *ngFor="let item of filters.brands">
+                <input
+                  class="mr-2"
+                  [value]="item"
+                  type="checkbox"
+                  (change)="onFilterChange('brand', item)"
+                  [checked]="savedFilters.brands.includes(item)"
+                />
+                <strong>{{ item }}</strong>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-8 col-md-6 col-lg-2 py-1">
+        <button
+          type="button"
+          href="#pageSubmenu"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle form-control"
+        >
+          {{ "Home.FuelType" | translate }}
+        </button>
+        <ul
+          class="collapse list-unstyled"
+          id="pageSubmenu"
+          style="color: aliceblue; background-color: black"
+        >
+          <li>
+            <div id="fuelList" class="d-flex flex-column">
+              <span class="ml-3" *ngFor="let item of filters.fuelTypes">
+                <input
+                  class="mr-2"
+                  [value]="item"
+                  type="checkbox"
+                  (change)="onFilterChange('fuelType', item)"
+                  [checked]="savedFilters.fuelTypes.includes(item)"
+                />
+                <strong>{{ item }}</strong>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-8 col-md-6 col-lg-2 py-1">
+        <button
+          type="button"
+          href="#pageSubmenu1"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle form-control"
+        >
+          {{ "Home.Transmission" | translate }}
+        </button>
+        <ul
+          class="collapse list-unstyled"
+          id="pageSubmenu1"
+          style="color: aliceblue; background-color: black"
+        >
+          <li>
+            <div id="transmissionList" class="d-flex flex-column">
+              <span class="ml-3" *ngFor="let item of filters.transmission">
+                <input
+                  class="mr-2"
+                  [value]="item"
+                  type="checkbox"
+                  (change)="onFilterChange('transmission', item)"
+                  [checked]="savedFilters.transmission.includes(item)"
+                />
+                <strong>{{ item }}</strong>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-8 col-md-6 col-lg-2 py-1">
+        <button
+          type="button"
+          href="#pageSubmenu3"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle form-control"
+        >
+          {{ "Home.PriceRange" | translate }}
+        </button>
+        <ul
+          class="collapse list-unstyled"
+          id="pageSubmenu3"
+          style="color: aliceblue; background-color: black"
+        >
+          <li>
+            <div id="rangeList" class="d-flex flex-column">
+              <span class="ml-3" *ngFor="let item of range">
+                <input
+                  class="mr-2"
+                  [value]="item.id"
+                  type="checkbox"
+                  (change)="onFilterChange('range', item)"
+                  [checked]="savedFilters.range.includes(item.value)"
+                />
+                <strong>{{ item.value }}</strong>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-2">
+      <a (click)="onSearch()" class="btn btn-primary mb-2" type="submit"
+        >Search</a
+      >
+    </div>
+  </div>
 </div>
 
 <!-- Private Lease  -->
 <div id="privateLease" class="container-fluid private-lease">
-    <div class="row justify-content-center display-4 private-lease-caption mb-5">
-        What is private lease
+  <div class="row justify-content-center display-4 private-lease-caption mb-5">
+    What is private lease
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+      <p>
+        Leasing, or personal contract hire, is an easy and flexible way to drive
+        away in the car you want. Simply pay the monthly costs to cover the
+        depreciation of the car, and hand it back at the end of the lease!
+      </p>
     </div>
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-6">
-            <p>
-                Leasing, or personal contract hire, is an easy and flexible way to drive away in the car you want.
-                Simply pay
-                the monthly costs to cover the depreciation of the car, and hand it back at the end of the lease!
-            </p>
-        </div>
-        <div class="col-md-6">
-            <img src="/assets/images/private-lease.png" alt="private lease poster" class="private-lease-image">
-        </div>
+    <div class="col-md-6">
+      <img
+        src="/assets/images/private-lease.png"
+        alt="private lease poster"
+        class="private-lease-image"
+      />
     </div>
+  </div>
 </div>
 
 <!-- Spinner -->
-<ngx-spinner bdColor="rgba(0,0,0,0.78)" size="medium" color="#fa0000" type="triangle-skew-spin" [fullScreen]="true">
-    <p style="color: white"> Loading... </p>
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.78)"
+  size="medium"
+  color="#fa0000"
+  type="triangle-skew-spin"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
 </ngx-spinner>

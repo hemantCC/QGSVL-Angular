@@ -6,7 +6,8 @@ import { FilterRoutingModule } from './filter-routing.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatSidenavModule,
     NgxSpinnerModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    TranslateModule
   ]
 })
 export class FilterModule { }

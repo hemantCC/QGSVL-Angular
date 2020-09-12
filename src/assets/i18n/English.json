@@ -1,0 +1,13 @@
+{
+  "Home": {
+    "bannerTitle": "Search Vehicle",
+    "VehicleType": "Vehicle Type",
+    "Brand": "Brand",
+    "FuelType": "Fuel Type",
+    "Transmission": "Transmission",
+    "PriceRange": "Price Range"
+  },
+  "Filter": {
+    "drawerTitle": "Select Filter"
+  }
+}

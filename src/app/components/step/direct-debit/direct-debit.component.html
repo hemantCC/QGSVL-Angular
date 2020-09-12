@@ -20,7 +20,7 @@
         <div class="card-body">
           <form name="templateDrivenForm" novalidate>
             <div class="form-group row align-items-center">
-              <label for="iBan" class="col-sm-2 col-form-label">IBAN:</label>
+              <label for="iBan" class="col-sm-2 col-form-label"><span class="asterisk">*</span> IBAN:</label>
               <input id="iBan" name="iban" class="form-control col-md-4" #iban="ngModel" type="text" ibanValidator
                 [(ngModel)]="ibanNumber" required autocomplete="off">
               <div *ngIf="iban.invalid && (iban.dirty || iban.touched)" class="text-danger">

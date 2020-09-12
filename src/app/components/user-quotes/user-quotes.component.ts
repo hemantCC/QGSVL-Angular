@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteService } from 'src/app/services/quote.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-quotes',
@@ -9,7 +10,7 @@ import { QuoteService } from 'src/app/services/quote.service';
 export class UserQuotesComponent implements OnInit {
 
   quotes: any = [];
-  // car:any = [];
+  quotesSubscriptions: Subscription;
 
 
   constructor(private quote: QuoteService) { }
@@ -19,14 +20,19 @@ export class UserQuotesComponent implements OnInit {
   }
 
   getQuotes() {
-    this.quote.getUserQuotes().subscribe((res: any) => {
+    this.quotesSubscriptions = this.quote.getUserQuotes().subscribe((res: any) => {
       this.quotes = res;
-      // this.car = res.car;
       console.log(this.quotes);
     },
       err => {
         console.error(err);
       })
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.quotesSubscriptions.unsubscribe();
   }
 
 }

@@ -21,19 +21,19 @@
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
             <div class="form-group">
-              <div class="mt-3 mb-3"><b>Driving License</b></div>
+              <div class="mt-3 mb-3"><b>Driving License</b> <span class="asterisk"> *</span></div>
               <input name="DL" type="file" #drivingLicense (change)="onChangeDrivingLicense($event.target.files)"/>
               <!-- <span class="text-danger">Max file size : 3MB</span> -->
             </div>
             <hr />
             <div class="form-group">
-              <div class="mt-5 mb-3"><b>Certificate Of Residence</b></div>
+              <div class="mt-5 mb-3"><b>Certificate Of Residence</b> <span class="asterisk"> *</span></div>
               <input name="COR" type="file"  #certificateOfResidence (change)="onChangeCOR($event.target.files)" />
               <!-- <span style="color:red;">Max file size : 3MB</span> -->
             </div>
             <hr />
             <div class="form-group">
-              <div class="mt-5 mb-3"><b>Identification Proof</b></div>
+              <div class="mt-5 mb-3"><b>Identification Proof</b> <span class="asterisk"> *</span></div>
               <input name="IDProof" type="file" #identificationProof (change)="onChangeIdProof($event.target.files)" />
               <!-- <span style="color:red;">Max file size : 3MB</span> -->
             </div>

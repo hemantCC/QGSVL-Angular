@@ -5,6 +5,8 @@ import { AccountService } from 'src/app/services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { dropDownValues } from 'src/app/models/creditCheck';
 import { NgxSpinnerService } from 'ngx-spinner';
+declare var $: any; // ADD THIS
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +30,9 @@ export class RegisterComponent implements OnInit {
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    $('[data-toggle="popover"]').popover({
+      trigger: 'focus'
+    });
   }
 
   formSubmit(form: NgForm) {

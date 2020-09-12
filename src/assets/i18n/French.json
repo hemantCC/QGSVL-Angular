@@ -1,0 +1,13 @@
+{
+  "Home": {
+    "bannerTitle": "Rechercher un véhicule",
+    "VehicleType": "Type de véhicule",
+    "Brand": "Marque",
+    "FuelType": "Type de carburant",
+    "Transmission": "Transmission",
+    "PriceRange": "Échelle des prix"
+  },
+  "Filter": {
+    "drawerTitle": "Sélectionnez le filtre"
+  }
+}

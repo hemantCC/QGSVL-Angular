@@ -90,7 +90,6 @@ export class AddressEmploymentComponent implements OnInit {
         creditCost: populate?.creditCost,
       });
       this.formSaved = true;
-      // if (localStorage.getItem('step1') != null) { this.formSubmitted = true}
     }
 
   }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Filters } from 'src/app/models/filters';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     { id: 2, value: '250-499' },
     { id: 3, value: '500-749' },
     { id: 4, value: '750-above' }]
+  dropdownSubscription: Subscription
 
   constructor(private router: Router,
     private toastr: ToastrService,
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   populateDropDown() {
-    this.vehicleService.getVehicleFilters().subscribe((res: any) => {
+    this.dropdownSubscription = this.vehicleService.getVehicleFilters().subscribe((res: any) => {
       this.dropDownValues = res;
       console.log(this.dropDownValues);
 
@@ -145,6 +147,12 @@ export class HomeComponent implements OnInit {
 
   onSearch() {
     this.router.navigateByUrl('/filter');
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.dropdownSubscription.unsubscribe();
   }
 
 

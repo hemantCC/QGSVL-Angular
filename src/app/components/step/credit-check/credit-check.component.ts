@@ -5,6 +5,7 @@ import { PersonalDetail } from 'src/app/models/personalDetail';
 import { ToastrService } from 'ngx-toastr';
 import { AggrementComponent } from './aggrement/aggrement.component';
 import { MatStepper } from '@angular/material/stepper';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class CreditCheckComponent implements OnInit {
 
   allValues: CreditCheckValues
   personalDetail: PersonalDetail
+  dropdownValuesSubscription: Subscription
+  postFormSubscription: Subscription
   @ViewChild(AggrementComponent) child;
   aggreed: boolean = false;
   ok: boolean = false;
@@ -48,7 +51,7 @@ export class CreditCheckComponent implements OnInit {
   }
 
   populateDropDown() {
-    this.stepService.creditCheckValues().subscribe((res: CreditCheckValues) => {
+    this.dropdownValuesSubscription = this.stepService.creditCheckValues().subscribe((res: CreditCheckValues) => {
       this.allValues = res
       console.log(this.allValues);
     },
@@ -58,7 +61,7 @@ export class CreditCheckComponent implements OnInit {
   }
 
   onContinue() {
-    this.stepService.postCreditCheck().subscribe(
+    this.postFormSubscription =  this.stepService.postCreditCheck().subscribe(
       () => {
         this.toastr.success('', 'Step-1 Completed!');
         this.stepper.selected.completed = true;
@@ -70,6 +73,13 @@ export class CreditCheckComponent implements OnInit {
         this.toastr.error('Please Try again.', 'Step-1 Failed!');
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.dropdownValuesSubscription.unsubscribe();
+    this.postFormSubscription.unsubscribe();
   }
 
 
